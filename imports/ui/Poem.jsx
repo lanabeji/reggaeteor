@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
 
 import {Poems} from "../api/poems.js";
 
@@ -15,14 +16,16 @@ export default class Poem extends Component {
 
     increaseCounter() {
 
-        // Set the checked property to the opposite of its current value
-        Poems.update(this.props.poem._id, {
-            $set: { counter: this.props.poem.counter+1 },
-        });
+        var contador = this.props.poem.counter;
+        Meteor.call('poems.increaseCounter', this.props.poem._id, contador+1);
+        var b = document.getElementById('LikeButton');
+        b.disabled = true;
     }
 
     deleteThisPoem() {
-        Poems.remove(this.props.poem._id);
+        if(this.props.poem.username === Meteor.user().username){
+            Meteor.call('poems.remove', this.props.poem._id);
+        }
     }
 
 
@@ -43,7 +46,7 @@ export default class Poem extends Component {
                     &times;
                 </button>
 
-                <button className="like" onClick={this.increaseCounter.bind(this)}>
+                <button className="like" id="LikeButton" onClick={this.increaseCounter.bind(this)}>
                     Like
                 </button>
 
