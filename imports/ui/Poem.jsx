@@ -5,7 +5,10 @@ import PropTypes from 'prop-types';
 export default class Poem extends Component {
     render() {
         return (
-            <li>{this.props.poem.text}</li>
+            <div>
+                <li>{this.props.poem.text}</li>
+            </div>
+
         );
     }
 }

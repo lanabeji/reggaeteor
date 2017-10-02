@@ -66,6 +66,6 @@ App.propTypes = {
 
 export default createContainer(()=>{
     return{
-        poems: Poems.find({}).fetch()
+        poems: Poems.find({}, { sort: { createdAt: -1 } }).fetch()
     };
 }, App);
