@@ -24,11 +24,13 @@ export default class Poem extends Component {
         if(b.name == 'PuedeContar'){
             Meteor.call('poems.increaseCounter', this.props.poem._id, contador+1);
             b.name = 'NoPuedeContar';
+            b.innerHTML='Unlike';
         }
 
         else{
             Meteor.call('poems.increaseCounter', this.props.poem._id, contador-1);
             b.name = 'PuedeContar';
+            b.innerHTML='Like';
         }
 
 
