@@ -1,19 +1,37 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 import Poem from './Poem.jsx';
 
+import {Poems} from "../api/poems.js";
+
+import {createContainer} from "meteor/react-meteor-data";
+
 // App component - represents the whole app
-export default class App extends Component {
-    getPoems() {
-        return [
-            { _id: 1, text: 'This is poem 1' },
-            { _id: 2, text: 'This is poem 2' },
-            { _id: 3, text: 'This is poem 3' },
-        ];
+class App extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+
+        // Find the text field via the React ref
+        const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+
+        Poems.insert({
+            text,
+            createdAt: new Date(), // current time
+        });
+
+        // Clear form
+        ReactDOM.findDOMNode(this.refs.textInput).value = '';
     }
 
     renderPoems() {
-        return this.getPoems().map((poem) => (
+        return this.props.poems.map((poem) => (
             <Poem key={poem._id} poem={poem} />
         ));
     }
@@ -22,7 +40,16 @@ export default class App extends Component {
         return (
             <div className="container">
                 <header>
-                    <h1>Poetry</h1>
+                    <h1>Poetry </h1>
+
+                    <form className="new-poem" onSubmit={this.handleSubmit.bind(this)} >
+                        <input
+                            type="text"
+                            ref="textInput"
+                            placeholder="Type to add new poems"
+                        />
+                    </form>
+
                 </header>
 
                 <ul>
@@ -32,3 +59,13 @@ export default class App extends Component {
         );
     }
 }
+
+App.propTypes = {
+    poems: PropTypes.array.isRequired
+};
+
+export default createContainer(()=>{
+    return{
+        poems: Poems.find({}).fetch()
+    };
+}, App);
