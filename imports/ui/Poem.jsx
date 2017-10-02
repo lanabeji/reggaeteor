@@ -34,6 +34,11 @@ export default class Poem extends Component {
 
         return (
             <li className={poemClassName}>
+
+                <span className="text">
+                    <strong>{this.props.poem.username}</strong>: {this.props.poem.text}
+                </span>
+
                 <button className="delete" onClick={this.deleteThisPoem.bind(this)}>
                     &times;
                 </button>
@@ -51,7 +56,6 @@ export default class Poem extends Component {
                     {/*onClick={this.toggleChecked.bind(this)}*/}
                 {/*/>*/}
 
-                <span className="text">{this.props.poem.text}</span>
             </li>
         );
     }

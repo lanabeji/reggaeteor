@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
 
 import Poem from './Poem.jsx';
 
@@ -25,7 +26,9 @@ class App extends Component {
         Poems.insert({
             text,
             createdAt: new Date(), // current time
-            counter: 0,
+            counter: 0,       //Number of likes
+            owner: Meteor.userId(),           // _id of logged in user
+            username: Meteor.user().username,  // username of logged in user
         });
 
         // Clear form
@@ -46,13 +49,15 @@ class App extends Component {
 
                     <AccountsUIWrapper />
 
-                    <form className="new-poem" onSubmit={this.handleSubmit.bind(this)} >
-                        <input
-                            type="text"
-                            ref="textInput"
-                            placeholder="Type to add new poems"
-                        />
-                    </form>
+                    { this.props.currentUser ?
+                        <form className="new-poem" onSubmit={this.handleSubmit.bind(this)} >
+                            <input
+                                type="text"
+                                ref="textInput"
+                                placeholder="Type to add new poems"
+                            />
+                        </form> : ''
+                    }
 
                 </header>
 
@@ -65,11 +70,13 @@ class App extends Component {
 }
 
 App.propTypes = {
-    poems: PropTypes.array.isRequired
+    poems: PropTypes.array.isRequired,
+    currentUser: PropTypes.object,
 };
 
 export default createContainer(()=>{
     return{
-        poems: Poems.find({}, { sort: { createdAt: -1 } }).fetch()
+        poems: Poems.find({}, { sort: { createdAt: -1 } }).fetch(),
+        currentUser: Meteor.user(),
     };
 }, App);
