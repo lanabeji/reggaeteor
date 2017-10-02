@@ -4,6 +4,13 @@ import { check } from 'meteor/check';
 
 export const Poems = new Mongo.Collection("Poems");
 
+if (Meteor.isServer) {
+    // This code only runs on the server
+    Meteor.publish('poems', function tasksPublication() {
+        return Poems.find();
+    });
+}
+
 Meteor.methods({
     'poems.insert'(text) {
         check(text, String);
@@ -25,6 +32,12 @@ Meteor.methods({
         check(poemId,String);
 
         if (! Meteor.userId()) {
+            throw new Meteor.Error('not-authorized');
+        }
+
+        const poem = Poems.findOne(poemId);
+        if (poem.owner !== Meteor.userId()) {
+            // Only the owner can delete the poem
             throw new Meteor.Error('not-authorized');
         }
 

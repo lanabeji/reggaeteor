@@ -23,9 +23,7 @@ export default class Poem extends Component {
     }
 
     deleteThisPoem() {
-        if(this.props.poem.username === Meteor.user().username){
-            Meteor.call('poems.remove', this.props.poem._id);
-        }
+        Meteor.call('poems.remove', this.props.poem._id);
     }
 
 

@@ -69,6 +69,9 @@ App.propTypes = {
 };
 
 export default createContainer(()=>{
+
+    Meteor.subscribe('poems');
+
     return{
         poems: Poems.find({}, { sort: { createdAt: -1 } }).fetch(),
         currentUser: Meteor.user(),
