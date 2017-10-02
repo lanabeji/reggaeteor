@@ -17,9 +17,21 @@ export default class Poem extends Component {
     increaseCounter() {
 
         var contador = this.props.poem.counter;
-        Meteor.call('poems.increaseCounter', this.props.poem._id, contador+1);
+
         var b = document.getElementById('LikeButton');
-        b.disabled = true;
+        console.log(b.name);
+
+        if(b.name == 'PuedeContar'){
+            Meteor.call('poems.increaseCounter', this.props.poem._id, contador+1);
+            b.name = 'NoPuedeContar';
+        }
+
+        else{
+            Meteor.call('poems.increaseCounter', this.props.poem._id, contador-1);
+            b.name = 'PuedeContar';
+        }
+
+
     }
 
     deleteThisPoem() {
@@ -44,7 +56,7 @@ export default class Poem extends Component {
                     &times;
                 </button>
 
-                <button className="like" id="LikeButton" onClick={this.increaseCounter.bind(this)}>
+                <button className="like" id="LikeButton" name='PuedeContar' onClick={this.increaseCounter.bind(this)}>
                     Like
                 </button>
 
