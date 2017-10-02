@@ -7,6 +7,7 @@ import Poem from './Poem.jsx';
 import {Poems} from "../api/poems.js";
 
 import {createContainer} from "meteor/react-meteor-data";
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
 // App component - represents the whole app
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
         Poems.insert({
             text,
             createdAt: new Date(), // current time
+            counter: 0,
         });
 
         // Clear form
@@ -41,6 +43,8 @@ class App extends Component {
             <div className="container">
                 <header>
                     <h1>Poetry </h1>
+
+                    <AccountsUIWrapper />
 
                     <form className="new-poem" onSubmit={this.handleSubmit.bind(this)} >
                         <input
