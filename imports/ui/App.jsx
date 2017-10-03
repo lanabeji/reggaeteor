@@ -46,7 +46,7 @@ class App extends Component {
 
         this.setState({
             filteredPoems: filtrados.sort(function (a, b) {
-                return a.counter - b.counter;
+                return b.counter-a.counter;
             })
         });
 
@@ -56,8 +56,15 @@ class App extends Component {
 
     renderTopPoems(){
 
+        let arrayOrdenado = this.props.poems.sort(function (a, b) {
+            return b.counter-a.counter;
+        });
 
-        let top = this.props.poems.slice(0,10);
+        let top = arrayOrdenado.slice(0,11);
+
+        return top.map((poem)=>(
+            <Poem key={poem._id} poem={poem} />
+        ));
 
     }
 
@@ -115,7 +122,7 @@ class App extends Component {
 
                 <p>Top 10</p>
                 <ul>
-
+                    {this.renderTopPoems()}
                 </ul>
             </div>
         );
