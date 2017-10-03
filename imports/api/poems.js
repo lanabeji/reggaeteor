@@ -50,4 +50,9 @@ Meteor.methods({
         Poems.update(poemId, { $set: {counter: newCounter} });
 
     },
+    'poems.findBy'(userFilter){
+        check(userFilter, String);
+
+        return Poems.find({username: userFilter});
+    }
 });

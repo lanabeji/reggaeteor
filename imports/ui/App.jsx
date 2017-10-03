@@ -15,6 +15,13 @@ class App extends Component {
 
     constructor(props) {
         super(props);
+        this.state={
+            filteredPoems:[
+            ],
+            topPoems:[
+
+            ]
+        };
     }
 
     handleSubmit(event) {
@@ -27,6 +34,37 @@ class App extends Component {
 
         // Clear form
         ReactDOM.findDOMNode(this.refs.textInput).value = '';
+    }
+
+    handleSearch(event) {
+        event.preventDefault();
+
+        // Find the text field via the React ref
+        const text = ReactDOM.findDOMNode(this.refs.filterInput).value.trim();
+
+        let filtrados = this.props.poems.filter(poem => poem.username==text);
+
+        this.setState({
+            filteredPoems: filtrados.sort(function (a, b) {
+                return a.counter - b.counter;
+            })
+        });
+
+        // Clear form
+        ReactDOM.findDOMNode(this.refs.filterInput).value = '';
+    }
+
+    renderTopPoems(){
+
+
+        let top = this.props.poems.slice(0,10);
+
+    }
+
+    renderFilteredPoems(){
+        return this.state.filteredPoems.map((poem) => (
+            <Poem key={poem._id} poem={poem} />
+        ));
     }
 
     renderPoems() {
@@ -44,19 +82,40 @@ class App extends Component {
                     <AccountsUIWrapper />
 
                     { this.props.currentUser ?
-                        <form className="new-poem" onSubmit={this.handleSubmit.bind(this)} >
+                        <form className="new-poem"  >
                             <input
                                 type="text"
                                 ref="textInput"
                                 placeholder="Type to add new poems"
                             />
+                            <button onClick={this.handleSubmit.bind(this)}>Send</button>
                         </form> : ''
                     }
+
+                    <form className="filter-poem">
+                        <input
+                            type="text"
+                            ref="filterInput"
+                            placeholder="Filter poems by username"
+                        />
+                        <button onClick={this.handleSearch.bind(this)}>Search</button>
+
+                    </form>
 
                 </header>
 
                 <ul>
                     {this.renderPoems()}
+                </ul>
+
+                <p>Filters </p>
+                <ul>
+                    {this.renderFilteredPoems()}
+                </ul>
+
+                <p>Top 10</p>
+                <ul>
+
                 </ul>
             </div>
         );
