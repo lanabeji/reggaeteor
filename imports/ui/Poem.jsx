@@ -18,20 +18,22 @@ export default class Poem extends Component {
 
         var contador = this.props.poem.counter;
 
-        var b = document.getElementById('LikeButton');
-        console.log(b.name);
+        // var b = document.getElementById('LikeButton');
+        // console.log(b.name);
 
-        if(b.name == 'PuedeContar'){
-            Meteor.call('poems.increaseCounter', this.props.poem._id, contador+1);
-            b.name = 'NoPuedeContar';
-            b.innerHTML='Unlike';
-        }
+        Meteor.call('poems.increaseCounter', this.props.poem._id, contador+1);
 
-        else{
-            Meteor.call('poems.increaseCounter', this.props.poem._id, contador-1);
-            b.name = 'PuedeContar';
-            b.innerHTML='Like';
-        }
+        // if(b.name == 'PuedeContar'){
+        //     Meteor.call('poems.increaseCounter', this.props.poem._id, contador+1);
+        //     b.name = 'NoPuedeContar';
+        //     b.innerHTML='Unlike';
+        // }
+        //
+        // else{
+        //     Meteor.call('poems.increaseCounter', this.props.poem._id, contador-1);
+        //     b.name = 'PuedeContar';
+        //     b.innerHTML='Like';
+        // }
 
 
     }
@@ -58,11 +60,14 @@ export default class Poem extends Component {
                     &times;
                 </button>
 
+                {/*<button style={{visibility:'hidden'}}>Soy falso</button>*/}
+                <br/>
+
                 <button className="like" id="LikeButton" name='PuedeContar' onClick={this.increaseCounter.bind(this)}>
                     Like
                 </button>
 
-                <p>{this.props.poem.counter} </p>
+                <span><span>   </span>{this.props.poem.counter} </span>
 
                 {/*<input*/}
                     {/*type="checkbox"*/}

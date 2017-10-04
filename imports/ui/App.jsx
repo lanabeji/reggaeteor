@@ -92,6 +92,8 @@ class App extends Component {
                 <div className="row">
                     <div className="col-4">
 
+                        <p>Dashboard</p>
+
                         { this.props.currentUser ?
                             <form className="new-poem"  >
                                 <input
