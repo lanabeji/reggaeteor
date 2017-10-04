@@ -88,42 +88,53 @@ class App extends Component {
 
                     <AccountsUIWrapper />
 
-                    { this.props.currentUser ?
-                        <form className="new-poem"  >
+                </header>
+                <div className="row">
+                    <div className="col-4">
+
+                        { this.props.currentUser ?
+                            <form className="new-poem"  >
+                                <input
+                                    type="text"
+                                    ref="textInput"
+                                    placeholder="Type to add new poems"
+                                />
+                                <button onClick={this.handleSubmit.bind(this)}>Send</button>
+                            </form> : ''
+                        }
+
+                        <ul>
+                            {this.renderPoems()}
+                        </ul>
+                    </div>
+
+                    <div className="col-4">
+
+                        <p>Filters </p>
+                        <form className="filter-poem">
                             <input
                                 type="text"
-                                ref="textInput"
-                                placeholder="Type to add new poems"
+                                ref="filterInput"
+                                placeholder="Filter poems by username"
                             />
-                            <button onClick={this.handleSubmit.bind(this)}>Send</button>
-                        </form> : ''
-                    }
+                            <button onClick={this.handleSearch.bind(this)}>Search</button>
+                        </form>
 
-                    <form className="filter-poem">
-                        <input
-                            type="text"
-                            ref="filterInput"
-                            placeholder="Filter poems by username"
-                        />
-                        <button onClick={this.handleSearch.bind(this)}>Search</button>
+                        <ul>
+                            {this.renderFilteredPoems()}
+                        </ul>
+                    </div>
 
-                    </form>
+                    <div className="col-4">
 
-                </header>
+                        <p>Top 10</p>
+                        <ul>
+                            {this.renderTopPoems()}
+                        </ul>
 
-                <ul>
-                    {this.renderPoems()}
-                </ul>
+                    </div>
+                </div>
 
-                <p>Filters </p>
-                <ul>
-                    {this.renderFilteredPoems()}
-                </ul>
-
-                <p>Top 10</p>
-                <ul>
-                    {this.renderTopPoems()}
-                </ul>
             </div>
         );
     }
