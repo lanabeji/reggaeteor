@@ -101,28 +101,29 @@ class App extends Component {
             return b.puntaje - a.puntaje;
         });
 
-        var topUsers = lista.slice(0,11);
+        var topUsers = lista;
 
         console.log(topUsers);
 
-        let fechaActual = new Date();
+        topUsers.forEach(function posicion(user, i) {
+            Meteor.call('users.update', user._id, i);
+        });
 
 
-        Meteor.call('users.update', topUsers[0]._id, 1);
-        Meteor.call('users.update', topUsers[1]._id, 2);
-        Meteor.call('users.update', topUsers[2]._id, 3);
-        Meteor.call('users.update', topUsers[3]._id, 4);
-        Meteor.call('users.update', topUsers[4]._id, 5);
-        Meteor.call('users.update', topUsers[5]._id, 6);
-        Meteor.call('users.update', topUsers[6]._id, 7);
-        Meteor.call('users.update', topUsers[7]._id, 8);
-        Meteor.call('users.update', topUsers[8]._id, 9);
-        Meteor.call('users.update', topUsers[9]._id, 10);
+        // Meteor.call('users.update', topUsers[1]._id, 2);
+        // Meteor.call('users.update', topUsers[2]._id, 3);
+        // Meteor.call('users.update', topUsers[3]._id, 4);
+        // Meteor.call('users.update', topUsers[4]._id, 5);
+        // Meteor.call('users.update', topUsers[5]._id, 6);
+        // Meteor.call('users.update', topUsers[6]._id, 7);
+        // Meteor.call('users.update', topUsers[7]._id, 8);
+        // Meteor.call('users.update', topUsers[8]._id, 9);
+        // Meteor.call('users.update', topUsers[9]._id, 10);
 
 
 
-        // Meteor.call('users.puntaje', 0);
-        // Meteor.call('users.positions', 0);
+         // Meteor.call('users.puntaje', 0);
+         // Meteor.call('users.positions', 0);
 
         console.log(topUsers);
     }
