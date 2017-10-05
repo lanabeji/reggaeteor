@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 
 import Poem from './Poem.jsx';
+import Useer from './Useer.jsx';
 
 import {Poems} from "../api/poems.js";
 
@@ -105,10 +106,11 @@ class App extends Component {
 
         console.log(topUsers);
 
-        topUsers.forEach(function posicion(user, i) {
-            Meteor.call('users.update', user._id, i);
-        });
 
+        topUsers.forEach(function posicion(user, i) {
+            Meteor.call('users.update', user._id, i)
+
+        });
 
         // Meteor.call('users.update', topUsers[1]._id, 2);
         // Meteor.call('users.update', topUsers[2]._id, 3);
@@ -120,12 +122,22 @@ class App extends Component {
         // Meteor.call('users.update', topUsers[8]._id, 9);
         // Meteor.call('users.update', topUsers[9]._id, 10);
 
-
-
          // Meteor.call('users.puntaje', 0);
          // Meteor.call('users.positions', 0);
 
         console.log(topUsers);
+    }
+
+    renderUser(){
+
+        let lista = this.props.users.sort(function (a,b) {
+            return b.puntaje - a.puntaje;
+        });
+
+        return lista.map((user) => (
+            <Useer key={user._id} user={user} />
+        ));
+
     }
 
     renderFilteredPoems(){
@@ -196,6 +208,10 @@ class App extends Component {
                         </ul>
 
                         <button onClick={this.renderTopUsers}>Top users</button>
+
+                        <ul>
+                            {this.renderUser()}
+                        </ul>
 
                     </div>
                 </div>
