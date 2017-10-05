@@ -4,7 +4,6 @@ import { Meteor } from 'meteor/meteor';
 
 import {Poems} from "../api/poems.js";
 
-// Task component - represents a single
 export default class Poem extends Component {
 
     // toggleChecked() {
@@ -21,7 +20,7 @@ export default class Poem extends Component {
         // var b = document.getElementById('LikeButton');
         // console.log(b.name);
 
-        Meteor.call('poems.increaseCounter', this.props.poem._id, contador+1);
+        Meteor.call('poems.increaseCounter', this.props.poem._id, this.props.poem.owner);
 
         // if(b.name == 'PuedeContar'){
         //     Meteor.call('poems.increaseCounter', this.props.poem._id, contador+1);
@@ -55,6 +54,7 @@ export default class Poem extends Component {
                 <span className="text">
                     <strong>{this.props.poem.username}</strong>: {this.props.poem.text}
                 </span>
+                <p>{this.props.poem.tag}</p>
 
                 <button className="delete" onClick={this.deleteThisPoem.bind(this)}>
                     &times;
