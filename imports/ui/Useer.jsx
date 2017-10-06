@@ -14,12 +14,25 @@ export default class Useer extends Component {
         // so that we can style them nicely in CSS
         const userClassName = this.props.user.checked ? 'checked' : '';
 
+
         return (
             <li className={userClassName}>
 
                 <span className="text">
                     <strong>{this.props.user.username}</strong>: {this.props.user.puntaje}
                 </span>
+
+                { this.props.user.positions ?
+
+                    <div>
+                        <p>Historic positions</p>
+                    {this.props.user.positions.map(function (pos) {
+                        return <span>{pos},</span>
+                    })}
+                    </div>: ''
+                }
+
+                {/*<p>Position: {this.props.user.positions[0]} </p>*/}
                 {/*<p>{this.props.poem.tag}</p>*/}
 
             </li>

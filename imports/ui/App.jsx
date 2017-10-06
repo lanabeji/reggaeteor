@@ -112,18 +112,14 @@ class App extends Component {
 
         });
 
-        // Meteor.call('users.update', topUsers[1]._id, 2);
-        // Meteor.call('users.update', topUsers[2]._id, 3);
-        // Meteor.call('users.update', topUsers[3]._id, 4);
-        // Meteor.call('users.update', topUsers[4]._id, 5);
-        // Meteor.call('users.update', topUsers[5]._id, 6);
-        // Meteor.call('users.update', topUsers[6]._id, 7);
-        // Meteor.call('users.update', topUsers[7]._id, 8);
-        // Meteor.call('users.update', topUsers[8]._id, 9);
-        // Meteor.call('users.update', topUsers[9]._id, 10);
+        //Descomentar las siguientes dos lineas cuando las cosas salen mal y hay que borrar la info de puntae y posiciones de los usuarios
+        //Y comentar el forEach de arriba
 
-         // Meteor.call('users.puntaje', 0);
-         // Meteor.call('users.positions', 0);
+        // Meteor.call('users.puntaje', 0);
+        // Meteor.call('users.positions', 0);
+
+        var b = document.getElementById('listaUsers');
+        b.style.visibility = "visible";
 
         console.log(topUsers);
     }
@@ -153,6 +149,7 @@ class App extends Component {
             <div className="container">
                 <header>
                     <h1>Poetry </h1>
+                    <p><i>At the touch of love everyone becomes a poet</i></p>
 
                     <AccountsUIWrapper />
 
@@ -209,9 +206,9 @@ class App extends Component {
 
                         <button onClick={this.renderTopUsers}>Top users</button>
 
-                        <ul>
+                        <ol id="listaUsers" style={{visibility:"hidden"}}>
                             {this.renderUser()}
-                        </ul>
+                        </ol>
 
                     </div>
                 </div>
