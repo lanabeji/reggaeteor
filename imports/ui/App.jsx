@@ -148,7 +148,7 @@ class App extends Component {
         return (
             <div className="container">
                 <header>
-                    <h1>Poetry </h1>
+                    <h1>Poetry 1.0</h1>
                     <p><i>At the touch of love everyone becomes a poet</i></p>
 
                     <AccountsUIWrapper />
