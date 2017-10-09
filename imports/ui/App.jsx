@@ -149,7 +149,7 @@ class App extends Component {
             <div className="container">
                 <header>
                     <h1>Poetry 1.0</h1>
-                    <p><i>At the touch of love everyone becomes a poet</i></p>
+                    <p>At the touch of love everyone becomes a poet</p>
 
                     <AccountsUIWrapper />
 
