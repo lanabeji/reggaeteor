@@ -102,7 +102,7 @@ class App extends Component {
         ));
 
     }
-
+    //Cuando se piden los top user varias veces, se siguen incrementando los badges. A veces no aparece la imagen del badge
     renderTopUsers() {
 
         let lista = this.props.users.sort(function (a, b) {
