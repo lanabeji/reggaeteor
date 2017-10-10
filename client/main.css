@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: white;
+}
+
+header {
+    overflow: auto;
+    background-color: rgba(235, 83, 71, 1);
+}
+
+img {
+    padding: 10px;
+    max-height: 50px;
+}
+
+hr {
+    margin: 5%;
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+.cont {
+    padding-top: 90px;
+}
+
+.navbar {
+    width: 100vw;
+    position: fixed;
+}
+
+.login-btn {
+    background-color: black;
+    color: white;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 65px;
+}
+
+.row {
+    padding: 0 5%;
+}
+
+.row::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.column {
+    float: left;
+    min-height: 100%;
+    top: 0;
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    width: 30%;
+    display: inline-block;
+}
+
+.titulos {
+    font-size: 2rem;
+}
+
+.poemInput {
+    height: 300px;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.poemTag {
+    border: solid black 1px;
+    width: 65%;
+    padding: 5px 10px;
+    height: 30px;
+}
+
+.filterInput {
+    border: solid black 1px;
+    width: 68%;
+    padding: 5px 10px;
+    height: 30px;
+
+}
+
+.filterInput,
+.poemTag,
+.poemInput {
+    border-radius: 5px;
+}
+
+.filterInput:focus,
+.poemTag:focus,
+.poemInput:focus {
+    border: 3px solid #555;
+    outline: none;
+}
+
+.filterBtn,
+.poemBtn {
+    background-color: rgba(235, 83, 71, 1);
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+    height: 100%;
+    margin-left: 10px;
+    padding: 0 6px;
+    line-height: 40px;
+}
+
+.filterBtn {
+    background-image: url("/search.png");
+    width: 10%;
+}
+
+.likesCounter {
+    padding: 0;
+}
+
+.topBtn {
+    background-color: rgba(235, 83, 71, 1);
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+    margin: 5px;
+    padding: 0 6px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    line-height: 20px;
+    padding: 5px;
+    background-origin: content-box;
+}
+
+.filterBtn,
+.like,
+.delete {
+    background-color: rgba(235, 83, 71, 1);
+    border: none;
+    border-radius: 5px;
+    width: 50px;
+    margin: 5px;
+    padding: 0 6px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    line-height: 20px;
+    padding: 5px;
+    background-origin: content-box;
+}
+
+.help {
+    /*TODO*/
+}
+
+.delete {
+    background-image: url("/trash.png");
+}
+
+.like {
+    background-image: url("/like.png");
+}
+
+.poemTag,
+.poemBtn {
+    display: inline-block;
+}
+
+.poemAuthor {
+    font-size: 1.2em;
+}
+
+.poemText {
+    text-align: justify;
+}
+
+.poemTextTag {
+    margin-top: 0;
+    font-weight: bolder;
+
+}
+
+.poem {
+    overflow: hidden;
+    padding: 15px;
+    list-style-type: none;
+}
+
+.user {
+    overflow: hidden;
+    padding: 15px;
+    list-style-type: none;
+}
+
+.buttons {
+    float: right;
+}
+
+.badge {
+    padding: 0;
+    height: 1em;
+}
+
+#listaUsers,
+.poemList {
+    padding: 0;
+    margin: 0;
+}
+
+.longlist{
+    border-top: solid black 1px;
+    border-bottom: solid black 1px;
+    height: 500px;
+    overflow: scroll;
+}
+
+#listaUsers {
+    text-align: left;
+    margin-top: 10px;
+}
+
+#Col4,
+#Col5 {
+    text-align: center;
+    width: 40%;
+    display: inline-block;
+    margin: 0px 3%;
+}
+
+#login-buttons #signup-link {
+    padding: 8px;
+    border-radius: 3px;
+    margin: 10px 0;
+}
+
+#login-buttons #signup-link:hover {
+    background-color: #000;
+}
+
+#login-buttons .login-close-text {
+    padding: 8px;
+    border-radius: 3px;
+    margin: 10px 0;
+}
+
+#login-buttons .login-close-text:hover {
+    background-color: black;
+}
+
+#login-buttons a {
+    text-decoration: none;
+    padding: 5px 15px;
+}
+
+#login-buttons a:hover {
+    background-color: #333333;
+}
+
+#login-dropdown-list {
+    background-color: #333;
+    color: #fff;
+}
+
+#login-buttons .login-button,
+.accounts-dialog .login-button {
+    background-color: rgba(235, 83, 71, 1);
+}
+
+#login-buttons .login-button:hover,
+.accounts-dialog .login-button:hover {
+    background-color: rgb(192, 74, 62);
+}
+
+#login-buttons .login-button,
+.accounts-dialog .login-button {
+    background-color: rgba(235, 83, 71, 1);
+    border: 1px solid rgba(235, 83, 71, 1);
+}
+
+#login-password,
+#login-username {
+    color: black;
+}
+
+#login-password:focus,
+#login-username:focus {
+    outline: none;
+}

@@ -1,6 +1,6 @@
-import React, { Component} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Meteor } from 'meteor/meteor';
+import {Meteor} from 'meteor/meteor';
 
 import {Poems} from "../api/poems.js";
 
@@ -44,39 +44,41 @@ export default class Poem extends Component {
 
     render() {
 
-        // Give tasks a different className when they are checked off,
-        // so that we can style them nicely in CSS
-        const poemClassName = this.props.poem.checked ? 'checked' : '';
 
         return (
-            <li className={poemClassName}>
+            <div>
+                <li className="poem">
 
                 <span className="text">
-                    <strong>{this.props.poem.username}</strong>: {this.props.poem.text}
+                    <strong className="poemAuthor">{this.props.poem.username} posted:</strong>
+                    <p className="poemTextTag">{this.props.poem.tag}</p>
+                    <p className="poemText">"{this.props.poem.text}"</p>
                 </span>
-                <p>{this.props.poem.tag}</p>
 
-                <button className="delete" onClick={this.deleteThisPoem.bind(this)}>
-                    &times;
-                </button>
+                    <span className="buttons">
+                     <button className="delete" onClick={this.deleteThisPoem.bind(this)}>
+                         &nbsp;
+                     </button>
 
-                {/*<button style={{visibility:'hidden'}}>Soy falso</button>*/}
-                <br/>
+                    <button className="like" id="LikeButton" name='PuedeContar'
+                            onClick={this.increaseCounter.bind(this)}>
+                         &nbsp;
+                    </button>
 
-                <button className="like" id="LikeButton" name='PuedeContar' onClick={this.increaseCounter.bind(this)}>
-                    Like
-                </button>
-
-                <span><span>   </span>{this.props.poem.counter} </span>
-
-                {/*<input*/}
+                    <span className="likesCounter">
+                         Likes: {this.props.poem.counter}
+                    </span>
+                </span>
+                    {/*<input*/}
                     {/*type="checkbox"*/}
                     {/*readOnly*/}
                     {/*checked={this.props.poem.checked}*/}
                     {/*onClick={this.toggleChecked.bind(this)}*/}
-                {/*/>*/}
+                    {/*/>*/}
 
-            </li>
+                </li>
+                <hr/>
+            </div>
         );
     }
 }
