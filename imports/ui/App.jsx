@@ -158,6 +158,8 @@ class App extends Component {
                     </header>
                     <AccountsUIWrapper/>
                 </div>
+                
+                // Les recomiendo colocar algún tipo de instrucción o mensaje de bienvenida ya que no es muy claro que hace la página cuando se entra por primera vez
                 <section className="cont">
                     <div className="row">
                         <div className="column" id="Col1">
@@ -181,7 +183,7 @@ class App extends Component {
                                 </form> : ''
                             }
                         </div>
-
+                        // El filter deja un espacio vacio en la mitad. Podrían ponerlo más bien a la derecha o agrandar la lista de poemas y poner el filtro justo encima.
                         <div className="column" id="Col2">
                             <p className="titulos">Filters </p>
                             <form className="filter-poem">
