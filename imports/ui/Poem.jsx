@@ -59,7 +59,7 @@ export default class Poem extends Component {
                      <button className="delete" onClick={this.deleteThisPoem.bind(this)}>
                          &nbsp;
                      </button>
-
+                    // Podrían limitar el número de likes por usuario ya que se puede incrementar ilimitadamente.
                     <button className="like" id="LikeButton" name='PuedeContar'
                             onClick={this.increaseCounter.bind(this)}>
                          &nbsp;
