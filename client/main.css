@@ -283,11 +283,13 @@ hr {
     border: 1px solid rgba(235, 83, 71, 1);
 }
 
+#login-password-again,
 #login-password,
 #login-username {
     color: black;
 }
 
+#login-password-again:focus,
 #login-password:focus,
 #login-username:focus {
     outline: none;
