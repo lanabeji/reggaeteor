@@ -49,11 +49,19 @@ class App extends Component {
         const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
         const tag = ReactDOM.findDOMNode(this.refs.tagInput).value.trim();
 
-        Meteor.call('poems.insert', text, tag);
+        if (!(text == "" || tag == "")) {
 
-        // Clear form
-        ReactDOM.findDOMNode(this.refs.textInput).value = '';
-        ReactDOM.findDOMNode(this.refs.tagInput).value = '';
+            text.replace(/\r?\n/g, '<br />');
+            console.log(text);
+            Meteor.call('poems.insert', text, tag);
+
+            // Clear form
+            ReactDOM.findDOMNode(this.refs.textInput).value = '';
+            ReactDOM.findDOMNode(this.refs.tagInput).value = '';
+        } else {
+            alert("Please complete all the fields");
+        }
+
     }
 
     handleSearch(event) {
@@ -74,7 +82,7 @@ class App extends Component {
         }
         else {
             let list = this.props.poems;
-            let filtrados = list.filter(poem => poem.username == text);
+            let filtrados = list.filter(poem => poem.text.includes(text) || poem.username.includes(text) || poem.tag.includes(text));
 
             console.log("Entró a handle search");
 
@@ -110,8 +118,6 @@ class App extends Component {
         });
 
         var topUsers = lista.slice(0, 5);
-
-
 
         topUsers.forEach(function posicion(user, i) {
             Meteor.call('users.update', user._id, i)
@@ -189,7 +195,7 @@ class App extends Component {
                                     className="filterInput"
                                     type="text"
                                     ref="filterInput"
-                                    placeholder="Filter by username, #tag"
+                                    placeholder="Filter by username, tag"
                                 />
                                 <button className="filterBtn" onClick={this.handleSearch}>
                                     &nbsp;

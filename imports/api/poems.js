@@ -74,5 +74,8 @@ Meteor.methods({
     },
     'users.positions'(newPosition){
         Meteor.users.update({},{$set: {"positions": []}},{ multi: true })
+    },
+    'users'(){
+        return Meteor.userId();
     }
 });
