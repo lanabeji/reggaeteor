@@ -9,7 +9,12 @@ export default class Poem extends Component {
 
     increaseCounter() {
 
-        Meteor.call('poems.increaseCounter', this.props.poem._id, this.props.poem.owner);
+        Meteor.call('poems.increaseCounter', this.props.poem._id, this.props.poem.owner, function(error, result)
+        {
+         if(error){
+             alert("You've already voted this poem");
+         }
+        });
     }
 
     deleteThisPoem() {

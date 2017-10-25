@@ -70,17 +70,7 @@ class App extends Component {
         // Find the text field via the React ref
         const text = ReactDOM.findDOMNode(this.refs.filterInput).value.trim();
 
-        if (text.startsWith('#')) {
-            let list = this.props.poems;
-            console.log("Entró a handle search");
-            let filtrados = list.filter(poem => poem.tag == text);
-
-            this.setState({
-                filteredPoems: filtrados
-            });
-
-        }
-        else {
+        if (text !== "") {
             let list = this.props.poems;
             let filtrados = list.filter(poem => poem.text.includes(text) || poem.username.includes(text) || poem.tag.includes(text));
 
@@ -89,6 +79,8 @@ class App extends Component {
             this.setState({
                 filteredPoems: filtrados
             });
+        } else {
+            alert("Please enter a valid filter value");
         }
 
         // Clear form
@@ -119,10 +111,10 @@ class App extends Component {
 
         var topUsers = lista.slice(0, 5);
 
-        topUsers.forEach(function posicion(user, i) {
-            Meteor.call('users.update', user._id, i)
+     //   topUsers.forEach(function posicion(user, i) {
+        //       Meteor.call('users.update', user._id, i)
 
-        });
+    //    });
 
         //Descomentar las siguientes dos lineas cuando las cosas salen mal y hay que borrar la info de puntae y posiciones de los usuarios
         //Y comentar el forEach de arriba

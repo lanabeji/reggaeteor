@@ -31,7 +31,8 @@ Meteor.methods({
             counter:0,
             owner: Meteor.userId(),
             username: Meteor.user().username,
-            tag: tag
+            tag: tag,
+            likers: []
         });
     },
     'poems.remove'(poemId){
@@ -53,8 +54,18 @@ Meteor.methods({
         check(poemId, String);
        // check(newCounter,String);
 
-        Poems.update(poemId, { $inc: {counter: 1} });
-        Meteor.users.update(userId, {$inc:{puntaje: 1 }});
+        var cond = {likers: Meteor.userId()};
+        if (Poems.find(cond).fetch().length === 0) {
+            Poems.update(poemId, {$inc: {counter: 1}});
+            Meteor.users.update(userId, {$inc: {puntaje: 1}});
+
+            Poems.update(poemId, {$push: {"likers": Meteor.userId()}});
+        } else {
+            throw Error("already voted");
+            //alert("You've already voted this poem");
+        }
+
+
     },
     'poems.findBy'(userFilter){
         check(userFilter, String);
