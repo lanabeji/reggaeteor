@@ -31,7 +31,6 @@ export default class Poem extends Component {
 
 
     render() {
-        //this.showDeleteButton();
         return (
             <div>
                 <li className="poem">
@@ -43,14 +42,19 @@ export default class Poem extends Component {
                 </span>
 
                     <span className="buttons">
-                     <button className="delete" id="DeleteButton" onClick={this.deleteThisPoem.bind(this)} style={{visibility: "visible"}}>
-                         &nbsp;
-                     </button>
+                        {this.props.user ?
+                            <button className="delete" id="DeleteButton" onClick={this.deleteThisPoem.bind(this)}
+                                    style={{visibility: "visible"}}>
+                                &nbsp;
+                            </button> : ''
+                        }
 
-                    <button className="like" id="LikeButton" name='PuedeContar'
-                            onClick={this.increaseCounter.bind(this)}>
-                         &nbsp;
-                    </button>
+                        {this.props.user ?
+                            <button className="like" id="LikeButton" name='PuedeContar'
+                                    onClick={this.increaseCounter.bind(this)}>
+                                &nbsp;
+                            </button> : ''
+                        }
 
                     <span className="likesCounter">
                          Likes: {this.props.poem.counter}

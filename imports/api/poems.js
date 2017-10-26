@@ -64,8 +64,6 @@ Meteor.methods({
             throw Error("already voted");
             //alert("You've already voted this poem");
         }
-
-
     },
     'poems.findBy'(userFilter){
         check(userFilter, String);
@@ -85,8 +83,5 @@ Meteor.methods({
     },
     'users.positions'(newPosition){
         Meteor.users.update({},{$set: {"positions": []}},{ multi: true })
-    },
-    'users'(){
-        return Meteor.userId();
     }
 });
