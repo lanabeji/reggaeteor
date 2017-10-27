@@ -30,7 +30,8 @@ export default class Poem extends Component {
                 <span className="text">
                     <strong className="poemAuthor">{this.props.poem.username} posted:</strong>
                     <p className="poemTextTag">{this.props.poem.tag}</p>
-                    <p className="poemText">{this.props.poem.text}</p>
+                    {console.log(this.props.poem.text)}
+                    <pre className="poemText">{this.props.poem.text}</pre>
                 </span>
 
                     <span className="buttons">

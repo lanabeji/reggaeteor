@@ -7,17 +7,25 @@ export const Messages = new Mongo.Collection("Messages");
 if (Meteor.isServer) {
     // This code only runs on the server
     Meteor.publish('messages', function tasksPublication() {
-        return Messages.find();
+        return Messages.find({$or: [ { to: Meteor.user().username }, { from: Meteor.user().username  } ] });
+        //return Messages.find();
     });
 
 }
 
+Messages.deny({
+    insert() { return true; },
+    update() { return true; },
+    remove() { return true; },
+});
+
 Meteor.methods({
 
-    'messages.insert'(to,from,text) {
+    'messages.insert'(to,text) {
         check(text, String);
         check(to, String);
-        check(from, String);
+
+        var from= Meteor.user().username;
 
         // Make sure the user is logged in before inserting a message
         if (! Meteor.userId()) {

@@ -80,10 +80,10 @@ class App extends Component {
             let lista = this.props.users.filter(user=>user.username===to|| user.username===low || user.username===upp);
 
             if(lista.length !== 0){
-                const from = this.props.currentUser.username;
-                console.log(from);
+                //const from = this.props.currentUser.username;
+                //console.log(from);
 
-                Meteor.call('messages.insert',to,from,mess);
+                Meteor.call('messages.insert',to,mess);
 
                 // Clear form
                 ReactDOM.findDOMNode(this.refs.toInput).value = '';
@@ -135,7 +135,6 @@ class App extends Component {
 
         var top = arrayOrdenado.slice(0, 5);
 
-        console.log("Entró a top poems");
         return top.map((poem) => (
             <Poem key={poem._id} poem={poem} user={this.props.currentUser}/>
         ));
@@ -155,16 +154,12 @@ class App extends Component {
 
         var topUsers = lista.slice(0, 5);
 
-     //   topUsers.forEach(function posicion(user, i) {
-        //       Meteor.call('users.update', user._id, i)
-
-    //    });
 
         //Descomentar las siguientes dos lineas cuando las cosas salen mal y hay que borrar la info de puntae y posiciones de los usuarios
         //Y comentar el forEach de arriba
 
-        //Meteor.call('users.puntaje', 0);
-        //Meteor.call('users.positions', 0);
+        //Meteor.call('users.puntaje');
+        //Meteor.call('users.positions');
 
         var b = document.getElementById('listaUsers');
         b.style.visibility = "visible";
@@ -195,6 +190,8 @@ class App extends Component {
        //Descomentar en caso de querer borrar todos los mensajes de los usuarios y de la bd
        //Meteor.call('users.messages');
        //Meteor.call('messages.deleteAll');
+
+        console.log(this.props.messages);
 
         return this.props.messages.filter(message=>message.to===this.props.currentUser.username).map((message)=>(
             <Message key={message._id} message={message} user={this.props.currentUser}/>

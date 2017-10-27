@@ -36,7 +36,7 @@ export default class Useer extends Component {
 
                 <span className="text">
                     <strong>{this.props.user.username}</strong>: {this.props.user.puntaje === undefined ? 0 : this.props.user.puntaje}
-                    puntos
+                    points
                 </span>
 
                     {this.props.user.positions ?

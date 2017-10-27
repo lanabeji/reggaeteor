@@ -15,6 +15,16 @@ if (Meteor.isServer) {
     });
 }
 
+Poems.deny({
+    insert() { return true; },
+    update() { return true; },
+    remove() { return true; },
+});
+
+Meteor.users.deny({
+    update() { return true; }
+});
+
 Meteor.methods({
     'poems.insert'(text,tag) {
         check(text, String);
@@ -52,7 +62,7 @@ Meteor.methods({
     },
     'poems.increaseCounter'(poemId, userId){
         check(poemId, String);
-       // check(newCounter,String);
+        check(userId, String);
 
         var cond = {likers: Meteor.userId(), _id: poemId};
         if (Poems.find(cond).fetch().length === 0) {
@@ -75,12 +85,14 @@ Meteor.methods({
         return Poems.find({"text" : /.*text.*/});
     },
     'users.update'(idUser, newPosition){
+        check(idUser,String);
+        check(newPosition,Number);
         Meteor.users.update(idUser, { $push: { "positions": newPosition } });
     },
-    'users.puntaje'(newPuntaje){
+    'users.puntaje'(){
         Meteor.users.update({}, {$set: {"puntaje": 0}},{ multi: true });
     },
-    'users.positions'(newPosition){
+    'users.positions'(){
         Meteor.users.update({},{$set: {"positions": []}},{ multi: true })
     }
 });
