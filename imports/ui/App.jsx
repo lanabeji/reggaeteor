@@ -54,12 +54,18 @@ class App extends Component {
 
         if (!(text == "" || tag == "")) {
 
-            console.log(text);
-            Meteor.call('poems.insert', text, tag);
+            if(tag.startsWith("#")){
+                console.log(text);
+                Meteor.call('poems.insert', text, tag);
 
-            // Clear form
-            ReactDOM.findDOMNode(this.refs.textInput).value = '';
-            ReactDOM.findDOMNode(this.refs.tagInput).value = '';
+                // Clear form
+                ReactDOM.findDOMNode(this.refs.textInput).value = '';
+                ReactDOM.findDOMNode(this.refs.tagInput).value = '';
+            }
+            else{
+                alert("Please insert # before your tag");
+            }
+
         } else {
             alert("Please complete all the fields");
         }
