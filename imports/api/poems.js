@@ -54,7 +54,7 @@ Meteor.methods({
         check(poemId, String);
        // check(newCounter,String);
 
-        var cond = {likers: Meteor.userId()};
+        var cond = {likers: Meteor.userId(), _id: poemId};
         if (Poems.find(cond).fetch().length === 0) {
             Poems.update(poemId, {$inc: {counter: 1}});
             Meteor.users.update(userId, {$inc: {puntaje: 1}});

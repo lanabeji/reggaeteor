@@ -129,8 +129,7 @@ class App extends Component {
 
     renderTopPoems() {
 
-        let lista = this.props.poems;
-        let arrayOrdenado = lista.sort(function (a, b) {
+        let arrayOrdenado = this.props.poems.sort(function (a, b) {
             return b.counter - a.counter;
         });
 
@@ -138,7 +137,7 @@ class App extends Component {
 
         console.log("Entró a top poems");
         return top.map((poem) => (
-            <Poem key={poem._id} poem={poem}/>
+            <Poem key={poem._id} poem={poem} user={this.props.currentUser}/>
         ));
 
     }
@@ -164,8 +163,8 @@ class App extends Component {
         //Descomentar las siguientes dos lineas cuando las cosas salen mal y hay que borrar la info de puntae y posiciones de los usuarios
         //Y comentar el forEach de arriba
 
-        // Meteor.call('users.puntaje', 0);
-        // Meteor.call('users.positions', 0);
+        //Meteor.call('users.puntaje', 0);
+        //Meteor.call('users.positions', 0);
 
         var b = document.getElementById('listaUsers');
         b.style.visibility = "visible";
@@ -187,14 +186,14 @@ class App extends Component {
 
     renderFilteredPoems() {
         return this.state.filteredPoems.map((poem) => (
-            <Poem key={poem._id} poem={poem}/>
+            <Poem key={poem._id} poem={poem} user={this.props.currentUser}/>
         ));
     }
 
     renderRcvMessages(){
 
        //Descomentar en caso de querer borrar todos los mensajes de los usuarios y de la bd
-        // Meteor.call('users.messages');
+       //Meteor.call('users.messages');
        //Meteor.call('messages.deleteAll');
 
         return this.props.messages.filter(message=>message.to===this.props.currentUser.username).map((message)=>(

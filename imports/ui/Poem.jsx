@@ -21,14 +21,6 @@ export default class Poem extends Component {
         Meteor.call('poems.remove', this.props.poem._id);
     }
 
-    showDeleteButton(){
-        if( Meteor.call('users') === this.props.poem.owner){
-            var b = document.getElementById("DeleteButton");
-            b.style.visibility = "visible";
-
-        }
-    }
-
 
     render() {
         return (
@@ -42,19 +34,36 @@ export default class Poem extends Component {
                 </span>
 
                     <span className="buttons">
-                        {this.props.user ?
-                            <button className="delete" id="DeleteButton" onClick={this.deleteThisPoem.bind(this)}
-                                    style={{visibility: "visible"}}>
-                                &nbsp;
-                            </button> : ''
-                        }
 
                         {this.props.user ?
-                            <button className="like" id="LikeButton" name='PuedeContar'
-                                    onClick={this.increaseCounter.bind(this)}>
-                                &nbsp;
-                            </button> : ''
+                            <span>
+                                {this.props.user.username===this.props.poem.username?
+                                    <button className="delete" id="DeleteButton" onClick={this.deleteThisPoem.bind(this)}
+                                            style={{display:"initial"}}>
+                                        &nbsp;
+                                    </button>
+                                    :
+                                    <button className="delete" id="DeleteButton" onClick={this.deleteThisPoem.bind(this)}
+                                            style={{display:"none"}}>
+                                        &nbsp;
+                                    </button>
+                                }
+                            </span>:''
                         }
+
+                        {this.props.user?
+                            <button className="like" id="LikeButton" name='PuedeContar' onClick={this.increaseCounter.bind(this)}
+                                    style={{display:"initial"}}>
+                                &nbsp;
+                            </button>
+                            :
+                            <button className="like" id="LikeButton" name='PuedeContar' onClick={this.increaseCounter.bind(this)}
+                                    style={{display:"none"}}>
+                                &nbsp;
+                            </button>
+                        }
+
+
 
                     <span className="likesCounter">
                          Likes: {this.props.poem.counter}
