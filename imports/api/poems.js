@@ -62,7 +62,6 @@ Meteor.methods({
             Poems.update(poemId, {$push: {"likers": Meteor.userId()}});
         } else {
             throw Error("already voted");
-            //alert("You've already voted this poem");
         }
     },
     'poems.findBy'(userFilter){
