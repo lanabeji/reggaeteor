@@ -54,7 +54,6 @@ class App extends Component {
 
         if (!(text == "" || tag == "")) {
 
-            text.replace(/\r?\n/g, '<br />');
             console.log(text);
             Meteor.call('poems.insert', text, tag);
 
@@ -80,8 +79,6 @@ class App extends Component {
             let lista = this.props.users.filter(user=>user.username===to|| user.username===low || user.username===upp);
 
             if(lista.length !== 0){
-                //const from = this.props.currentUser.username;
-                //console.log(from);
 
                 Meteor.call('messages.insert',to,mess);
 
