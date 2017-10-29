@@ -22,3 +22,6 @@ accounts-ui
 accounts-password
 percolate:synced-cron
 audit-argument-checks
+practicalmeteor:mocha
+xolvio:cleaner
+dburles:factory

@@ -31,7 +31,7 @@ Meteor.methods({
         check(tag, String);
 
         // Make sure the user is logged in before inserting a task
-        if (! Meteor.userId()) {
+        if (! this.userId) {
             throw new Meteor.Error('not-authorized');
         }
 
@@ -39,8 +39,8 @@ Meteor.methods({
             text,
             createdAt: new Date(),
             counter:0,
-            owner: Meteor.userId(),
-            username: Meteor.user().username,
+            owner: this.userId,
+            username: this.username,
             tag: tag,
             likers: []
         });
@@ -48,12 +48,12 @@ Meteor.methods({
     'poems.remove'(poemId){
         check(poemId,String);
 
-        if (! Meteor.userId()) {
+        if (! this.userId) {
             throw new Meteor.Error('not-authorized');
         }
 
         const poem = Poems.findOne(poemId);
-        if (poem.owner !== Meteor.userId()) {
+        if (poem.owner !== this.userId) {
             // Only the owner can delete the poem
             throw new Meteor.Error('not-authorized');
         }
@@ -64,25 +64,15 @@ Meteor.methods({
         check(poemId, String);
         check(userId, String);
 
-        var cond = {likers: Meteor.userId(), _id: poemId};
+        var cond = {likers: this.userId, _id: poemId};
         if (Poems.find(cond).fetch().length === 0) {
             Poems.update(poemId, {$inc: {counter: 1}});
             Meteor.users.update(userId, {$inc: {puntaje: 1}});
 
-            Poems.update(poemId, {$push: {"likers": Meteor.userId()}});
+            Poems.update(poemId, {$push: {"likers": this.userId}});
         } else {
             throw Error("already voted");
         }
-    },
-    'poems.findBy'(userFilter){
-        check(userFilter, String);
-
-        return Poems.find({username: userFilter});
-    },
-    'poems.find'(text){
-        check(text, String);
-
-        return Poems.find({"text" : /.*text.*/});
     },
     'users.update'(idUser, newPosition){
         check(idUser,String);

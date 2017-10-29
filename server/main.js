@@ -20,6 +20,8 @@ if(Meteor.isServer){
             usuarios.forEach(function posicion(user,i) {
                 Meteor.users.update(user._id, { $push: { "positions": i } });
             });
+
+            Meteor.users.update({}, {$set: {"puntaje": 0}},{ multi: true });
         }
     });
 }

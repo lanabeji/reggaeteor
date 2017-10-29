@@ -25,10 +25,10 @@ Meteor.methods({
         check(text, String);
         check(to, String);
 
-        var from= Meteor.user().username;
+        var from= this.username;
 
         // Make sure the user is logged in before inserting a message
-        if (! Meteor.userId()) {
+        if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
 
