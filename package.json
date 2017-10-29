@@ -12,5 +12,8 @@
     "react": "^15.6.0",
     "react-addons-pure-render-mixin": "^15.6.2",
     "react-dom": "^15.6.0"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0"
   }
 }
