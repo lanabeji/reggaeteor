@@ -13,12 +13,15 @@ import {Messages} from "../api/messages.js";
 import {createContainer} from "meteor/react-meteor-data";
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
+
+
 // App component - represents the whole app
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            currentPage : "AAA",
             filteredPoems: [],
             topPoems: []
         };
@@ -27,6 +30,9 @@ class App extends Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.renderTopUsers = this.renderTopUsers.bind(this);
         this.handleMessage = this.handleMessage.bind(this);
+        this.goHome = this.goHome.bind(this);
+        this.goTops = this.goTops.bind(this);
+        this.goMessages = this.goMessages.bind(this);
     }
 
     alerted() {
@@ -54,7 +60,7 @@ class App extends Component {
 
         if (!(text == "" || tag == "")) {
 
-            if(tag.startsWith("#")){
+            if (tag.startsWith("#")) {
                 console.log(text);
                 Meteor.call('poems.insert', text, tag);
 
@@ -62,7 +68,7 @@ class App extends Component {
                 ReactDOM.findDOMNode(this.refs.textInput).value = '';
                 ReactDOM.findDOMNode(this.refs.tagInput).value = '';
             }
-            else{
+            else {
                 alert("Please insert # before your tag");
             }
 
@@ -82,11 +88,11 @@ class App extends Component {
 
             let low = to.toLowerCase();
             let upp = to.toUpperCase();
-            let lista = this.props.users.filter(user=>user.username===to|| user.username===low || user.username===upp);
+            let lista = this.props.users.filter(user => user.username === to || user.username === low || user.username === upp);
 
-            if(lista.length !== 0){
+            if (lista.length !== 0) {
 
-                Meteor.call('messages.insert',to,mess);
+                Meteor.call('messages.insert', to, mess);
 
                 // Clear form
                 ReactDOM.findDOMNode(this.refs.toInput).value = '';
@@ -111,9 +117,9 @@ class App extends Component {
             let list = this.props.poems;
             let low = text.toLowerCase();
             let upp = text.toUpperCase();
-            let inicial = text.charAt(0).toUpperCase()+text.slice(1);
+            let inicial = text.charAt(0).toUpperCase() + text.slice(1);
             let filtrados = list.filter(poem => poem.text.includes(text) || poem.username.includes(text) ||
-                poem.tag.includes(text)|| poem.username.includes(low) || poem.tag.includes(low) || poem.text.includes(low)
+                poem.tag.includes(text) || poem.username.includes(low) || poem.tag.includes(low) || poem.text.includes(low)
                 || poem.username.includes(upp) || poem.tag.includes(upp) || poem.text.includes(upp)
                 || poem.username.includes(inicial) || poem.tag.includes(inicial) || poem.text.includes(inicial));
 
@@ -144,7 +150,7 @@ class App extends Component {
 
     }
 
-    renderNewMessage(){
+    renderNewMessage() {
         var b = document.getElementById('newMessage');
         b.style.display = "initial";
     }
@@ -188,155 +194,104 @@ class App extends Component {
         ));
     }
 
-    renderRcvMessages(){
+    renderRcvMessages() {
 
-       //Descomentar en caso de querer borrar todos los mensajes de los usuarios y de la bd
-       //Meteor.call('users.messages');
-       //Meteor.call('messages.deleteAll');
+        //Descomentar en caso de querer borrar todos los mensajes de los usuarios y de la bd
+        //Meteor.call('users.messages');
+        //Meteor.call('messages.deleteAll');
 
         console.log(this.props.messages);
 
-        return this.props.messages.filter(message=>message.to===this.props.currentUser.username).map((message)=>(
+        return this.props.messages.filter(message => message.to === this.props.currentUser.username).map((message) => (
             <Message key={message._id} message={message} user={this.props.currentUser}/>
         ));
     }
 
-    renderSndMessages(){
-        return this.props.messages.filter(message=>message.from===this.props.currentUser.username).map((message)=>(
+    renderSndMessages() {
+        return this.props.messages.filter(message => message.from === this.props.currentUser.username).map((message) => (
             <Message key={message._id} message={message} user={this.props.currentUser}/>
         ));
 
     }
 
+    goHome(event) {
+        console.log("Evento:"+event.value);
+        this.setState({
+            currentPage: "home"
+        })
+    }
+
+    goTops(event) {
+        console.log("Evento:"+event.value);
+        this.setState({
+            currentPage: "tops"
+        })
+    }
+
+    goMessages(event) {
+        console.log("Evento:"+event.value);
+        this.setState({
+            currentPage: "messages"
+        })
+    }
 
     render() {
         return (
             <div>
-                <div className="navbar">
-                    <header>
-                        <img src="/banner.png" alt="Logo Poetry"/>
-                    </header>
-                    <AccountsUIWrapper/>
-                </div>
-                <section className="cont">
-                    <div className="row">
-                        <div className="column" id="Col1">
 
-                            <p className="titulos">Write something...</p>
-
-                            {this.props.currentUser ?
-                                <form className="new-poem">
+                <div className="sidebar">
+                    {this.props.currentUser ?
+                        <div>
+                            <p className="titulos">¿Necesita' reggaeton?</p>
+                            <form className="new-poem">
                                 <textarea
                                     ref="textInput"
                                     className="poemInput"
-                                    placeholder="Type to add new poems"
+                                    placeholder="Comparte lo que quieras en este espacio"
                                 />
-                                    <input
-                                        type="text"
-                                        ref="tagInput"
-                                        className="poemTag"
-                                        placeholder="#tag"
-                                    />
-                                    <button className="poemBtn" onClick={this.handleSubmit}>Send</button>
-                                </form> : ''
-                            }
-                        </div>
-
-                        <div className="column" id="Col2">
-                            <p className="titulos">Filters </p>
-                            <form className="filter-poem">
-                                <input
-                                    className="filterInput"
-                                    type="text"
-                                    ref="filterInput"
-                                    placeholder="Filter by username, tag"
-                                />
-                                <button className="filterBtn" onClick={this.handleSearch}>
-                                    &nbsp;
-                                </button>
-                            </form>
-
-                            <ul className="poemList">
-                                {this.renderFilteredPoems()}
-                            </ul>
-
-                        </div>
-
-                        <div className="column" id="Col3">
-                            <p className="titulos">Feed</p>
-                            <div className="longlist">
-                                <ul className="poemList">
-                                    {this.renderPoems()}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <hr/>
-                <section>
-                    <div className="row">
-                        <div className="column" id="Col4">
-                            <p className="titulos">Top 5 poems</p>
-                            <div className="longlist">
-                                <ul className="poemList">
-                                    {this.renderTopPoems()}
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="column" id="Col5">
-                            <p className="titulos">Top 5 users</p>
-
-                            <button className="topBtn" onClick={this.renderTopUsers}>Get top users</button>
-                            <div className="longlist">
-                                <ol id="listaUsers" style={{visibility: "hidden"}}>
-                                    {this.renderUser()}
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <div>
-
-                    {this.props.currentUser ?
-                        <div>
-                            <button className="createMsg" onClick={this.renderNewMessage}>Create new message</button>
-                            <form className="new-message" id="newMessage" style={{display: "none"}}>
-
-                                <p>To:</p>
                                 <input
                                     type="text"
-                                    ref="toInput"
-                                    className="messageTo"
-                                    placeholder=""
+                                    ref="tagInput"
+                                    className="poemTag"
+                                    placeholder="#taggea tus publicaciones"
                                 />
-                                <p>Message:</p>
-                                <textarea
-                                        ref="textInputMessage"
-                                        className="messageInput"
-                                        placeholder="Type to add write a new message"
-                                    />
-
-                                <button className="messageBtn" onClick={this.handleMessage}>Send</button>
+                                <button className="poemBtn" onClick={this.handleSubmit}>Send</button>
                             </form>
-                        </div>: ''
-                    }
-
-                    {this.props.currentUser ?
-                        <div>
-                            <p><strong>Sent messages</strong></p>
+                            <p className="texto textoTag"><strong>Define un tag</strong> para tu publicación, ¡así nos
+                                aseguramos de que más gente pueda verla!</p>
+                        </div>
+                        :
+                        <div className="intro">
+                            <p className="titulos">¡Bienvenido!</p>
+                            <p className="texto"> Reggaeteor es una nueva alternativa para compartir tus versos
+                                favoritos del reggaeton!</p>
+                            <p className="texto">Para empezar solo tienes que seguir los siguientes pasos:</p>
                             <ul>
-                                {this.renderSndMessages()}
+                                <li><strong>Ingresa</strong> al sistema / Registráte</li>
+                                <li><strong>Comparte</strong> tus frases favoritas en el espacio indicado a la derecha
+                                </li>
+                                <li><strong>Dedícate</strong> a disfrutar de tus publicaciones y las de los demás</li>
                             </ul>
-                            <p><strong>Received messages</strong></p>
+                            <p className="texto">Además de esto, podrás:</p>
                             <ul>
-                                {this.renderRcvMessages()}
+                                <li>Seguir a usuarios con gustos similares al tuyo</li>
+                                <li>Contactar con estos usuarios</li>
+                                <li>Ver cuales son los usuarios más activos</li>
+                                <li>Ver el top 5 de frases de reggaeton más famosas</li>
                             </ul>
-                        </div>: 'No hay mensajes para ti :('
-
+                            <p className="texto">¡Para ingresar <strong>solo haz click en el botón "Ingresar"</strong>
+                                en la parte superior izquierda!</p>
+                        </div>
                     }
                 </div>
-
+                <div className="content">
+                    <p className="titulos">Feed</p>
+                    <div className="longlist">
+                        <ul className="poemList">
+                            {this.renderPoems()}
+                        </ul>
+                    </div>
+                </div>
             </div>
         )
             ;
