@@ -5,7 +5,6 @@ import {Meteor} from 'meteor/meteor';
 import App from '../App'
 
 
-
 const MainLayout = ({children}) => {
     return (
         <div className="main-layout">
@@ -17,8 +16,7 @@ const MainLayout = ({children}) => {
                         <Link to="/tops" className="navLink">Tops</Link>
                         <Link to="/messages" className="navLink">Mensajes</Link>
                         <Link to="/favorites" className="navLink">Favs</Link>
-                        {(Meteor.user() != undefined) ? console.log("Layout: " + Meteor.user().username) : console.log("Undefined")}
-                        {Meteor.call('something.print')}
+                        {(Meteor.user() != undefined) ? console.log("Layout: " + Meteor.user().username) : console.log("User: " + Meteor.user())}
                     </div>
                 </header>
                 <AccountsUIWrapper/>
@@ -28,5 +26,6 @@ const MainLayout = ({children}) => {
         </div>
     );
 };
+
 
 export default MainLayout;

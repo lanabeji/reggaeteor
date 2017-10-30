@@ -87,7 +87,8 @@ hr {
     box-shadow: -3px 0px 5px grey;
 }
 
-.homeContent{
+.homeContent,
+.topContent{
     display: inline-block;
     box-sizing: border-box;
     width: 100vw;

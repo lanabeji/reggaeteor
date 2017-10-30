@@ -56,12 +56,6 @@ class App extends Component {
         if (!(text == "" || tag == "")) {
 
             if (tag.startsWith("#")) {
-                if (this.props.currentUser != undefined){
-                    console.log(Meteor.user().username);
-                }
-                else{
-                    console.log("Pailis");
-                }
                 Meteor.call('poems.insert', text, tag);
 
                 // Clear form
@@ -216,6 +210,9 @@ class App extends Component {
 
     }
 
+    printPrueba(){
+        return "prueba";
+    }
 
 
     render() {

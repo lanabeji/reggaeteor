@@ -33,7 +33,6 @@ export default class Useer extends Component {
         return (
             <div>
                 <li className="user">
-
                 <span className="text">
                     <strong>{this.props.user.username}</strong>: {this.props.user.puntaje === undefined ? 0 : this.props.user.puntaje}
                     points
