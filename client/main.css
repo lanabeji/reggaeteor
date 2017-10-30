@@ -3,16 +3,25 @@
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: white;
+    color: #52514f;
 }
 
 header {
     overflow: auto;
-    background-color: rgba(235, 83, 71, 1);
+    background-color: #371f4c;
+    padding: 0 5%;
+    height: 60px;
+    line-height: 60px;
 }
 
 img {
-    padding: 10px;
     max-height: 50px;
+    padding: 5px 0;
+}
+
+strong{
+    color: #b75bb7;
+    font-size: 1.1rem;
 }
 
 hr {
@@ -30,6 +39,30 @@ hr {
 .navbar {
     width: 100vw;
     position: fixed;
+    height: 60px;
+    line-height: 60px;
+    z-index: 999;
+    display: inline-block;
+}
+
+.navItems{
+    float: right;
+}
+
+.navLink{
+    color: #eee;
+    display: inline-block;
+    height: 100%;
+    padding: 0 20px;
+    text-decoration: none;
+    font-size: 1.6em;
+    line-height: 60px;
+}
+
+.navLink:hover{
+    background-color: white;
+    color: rgb(85, 26, 139);
+    box-shadow: inset 0 0 10px grey;
 }
 
 .login-btn {
@@ -37,29 +70,69 @@ hr {
     color: white;
     height: 30px;
     line-height: 30px;
-    padding-left: 65px;
+    padding-left: 7%;
 }
 
-.row {
-    padding: 0 5%;
-}
 
-.row::after {
-    content: '';
-    display: block;
-    clear: both;
-}
-
-.column {
-    float: left;
-    min-height: 100%;
-    top: 0;
-    text-align: center;
-    margin: 0;
-    padding: 10px;
+.sidebar {
+    position: fixed;
+    top: 90px;
+    right: 0;
     width: 30%;
-    display: inline-block;
+    padding: 25px;
+    height: 100vh;
+    background: rgba(229, 229, 229, 1);
+    box-sizing: border-box;
+    z-index: 998;
+    box-shadow: -3px 0px 5px grey;
 }
+
+.content{
+    position: absolute;
+    width: 70%;
+    top: 90px;
+}
+
+.intro{
+    text-align: left;
+}
+
+.texto{
+    line-height: 1.2rem;
+}
+
+.textoTag{
+    padding-top: 25px;
+    font-size: 1.2em;
+    text-align: center;
+    line-height: 1.2em;
+}
+
+.main-layout,
+.render-target{
+    position: absolute;
+    top: 0;
+}
+/*.row {*/
+    /*padding: 0 5%;*/
+/*}*/
+
+/*.row::after {*/
+    /*content: '';*/
+    /*display: block;*/
+    /*clear: both;*/
+/*}*/
+
+/*.column {*/
+    /*float: left;*/
+    /*min-height: 100%;*/
+    /*top: 0;*/
+    /*text-align: center;*/
+    /*margin: 0;*/
+    /*padding: 10px;*/
+    /*width: 30%;*/
+    /*display: inline-block;*/
+/*}*/
 
 .titulos {
     font-size: 2rem;
@@ -104,10 +177,11 @@ hr {
 
 .filterBtn,
 .poemBtn {
-    background-color: rgba(235, 83, 71, 1);
+    color: #fff;
+    background-color: #371f4c;
     border: none;
     border-radius: 5px;
-    width: 20%;
+    width: 25%;
     height: 100%;
     margin-left: 10px;
     padding: 0 6px;
@@ -124,7 +198,7 @@ hr {
 }
 
 .topBtn {
-    background-color: rgba(235, 83, 71, 1);
+    background-color: #371f4c;
     border: none;
     border-radius: 5px;
     width: 100px;
@@ -141,7 +215,7 @@ hr {
 .filterBtn,
 .like,
 .delete {
-    background-color: rgba(235, 83, 71, 1);
+    background-color: #371f4c;
     border: none;
     border-radius: 5px;
     width: 50px;
@@ -225,13 +299,13 @@ hr {
     margin-top: 10px;
 }
 
-#Col4,
-#Col5 {
-    text-align: center;
-    width: 40%;
-    display: inline-block;
-    margin: 0px 3%;
-}
+/*#Col4,*/
+/*#Col5 {*/
+    /*text-align: center;*/
+    /*width: 40%;*/
+    /*display: inline-block;*/
+    /*margin: 0px 3%;*/
+/*}*/
 
 #login-buttons #signup-link {
     padding: 8px;
