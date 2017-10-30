@@ -14,14 +14,12 @@ import {createContainer} from "meteor/react-meteor-data";
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
 
-
 // App component - represents the whole app
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            currentPage : "AAA",
             filteredPoems: [],
             topPoems: []
         };
@@ -30,9 +28,6 @@ class App extends Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.renderTopUsers = this.renderTopUsers.bind(this);
         this.handleMessage = this.handleMessage.bind(this);
-        this.goHome = this.goHome.bind(this);
-        this.goTops = this.goTops.bind(this);
-        this.goMessages = this.goMessages.bind(this);
     }
 
     alerted() {
@@ -61,7 +56,12 @@ class App extends Component {
         if (!(text == "" || tag == "")) {
 
             if (tag.startsWith("#")) {
-                console.log(text);
+                if (this.props.currentUser != undefined){
+                    console.log(Meteor.user().username);
+                }
+                else{
+                    console.log("Pailis");
+                }
                 Meteor.call('poems.insert', text, tag);
 
                 // Clear form
@@ -92,7 +92,7 @@ class App extends Component {
 
             if (lista.length !== 0) {
 
-                Meteor.call('messages.insert', to, mess);
+                Meteor.call('messages.©insert', to, mess);
 
                 // Clear form
                 ReactDOM.findDOMNode(this.refs.toInput).value = '';
@@ -214,31 +214,11 @@ class App extends Component {
 
     }
 
-    goHome(event) {
-        console.log("Evento:"+event.value);
-        this.setState({
-            currentPage: "home"
-        })
-    }
 
-    goTops(event) {
-        console.log("Evento:"+event.value);
-        this.setState({
-            currentPage: "tops"
-        })
-    }
-
-    goMessages(event) {
-        console.log("Evento:"+event.value);
-        this.setState({
-            currentPage: "messages"
-        })
-    }
 
     render() {
         return (
-            <div>
-
+            <div className="homeContent">
                 <div className="sidebar">
                     {this.props.currentUser ?
                         <div>

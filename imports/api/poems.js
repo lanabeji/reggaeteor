@@ -40,7 +40,7 @@ Meteor.methods({
             createdAt: new Date(),
             counter:0,
             owner: this.userId,
-            username: this.username,
+            username: Meteor.user().username,
             tag: tag,
             likers: []
         });
@@ -84,5 +84,8 @@ Meteor.methods({
     },
     'users.positions'(){
         Meteor.users.update({},{$set: {"positions": []}},{ multi: true })
+    },
+    'something.print'(){
+        console.log("print");
     }
 });

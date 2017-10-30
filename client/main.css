@@ -87,10 +87,18 @@ hr {
     box-shadow: -3px 0px 5px grey;
 }
 
+.homeContent{
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100vw;
+}
+
 .content{
     position: absolute;
     width: 70%;
     top: 90px;
+    box-sizing: border-box;
+    padding: 0 25px;
 }
 
 .intro{
