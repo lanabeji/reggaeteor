@@ -40,7 +40,7 @@ Meteor.methods({
             createdAt: new Date(),
             counter:0,
             owner: this.userId,
-            username: Meteor.user().username,
+            username: Meteor.users.findOne(this.userId).username,
             tag: tag,
             likers: []
         });
