@@ -88,7 +88,9 @@ hr {
 }
 
 .homeContent,
-.topContent{
+.topContent,
+.messContent,
+.favContent{
     display: inline-block;
     box-sizing: border-box;
     width: 100vw;
