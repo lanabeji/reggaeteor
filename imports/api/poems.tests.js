@@ -3,7 +3,10 @@ import { Random } from 'meteor/random';
 import { Poems } from './poems.js';
 import { Messages } from './messages.js';
 import { assert } from 'meteor/practicalmeteor:chai';
+import { sinon } from 'meteor/practicalmeteor:sinon';
 import faker from "faker";
+import { resetDatabase } from "meteor/xolvio:cleaner";
+import { Factory } from "meteor/dburles:factory";
 
 if (Meteor.isServer) {
     describe('Poems', () => {
@@ -11,11 +14,22 @@ if (Meteor.isServer) {
 
             const userId = Random.id();
             let poemId;
-            let currentUser = faker.name.findName();
+            let name = faker.name.findName();
+            let currentUser;
             let currentTag = faker.lorem.word();
 
             beforeEach(() => {
                 Poems.remove({});
+
+                // Stud the user
+                resetDatabase();
+                Factory.define("user", Meteor.users, {
+                    username: name,
+                });
+                currentUser = Factory.create("user");
+                sinon.stub(Meteor, "user");
+                Meteor.user.returns(currentUser);
+
                 poemId = Poems.insert({
                     text: 'test poem',
                     createdAt: new Date(),
@@ -25,6 +39,11 @@ if (Meteor.isServer) {
                     tag:currentTag,
                     likers:[]
                 });
+            });
+
+            afterEach(() => {
+                Meteor.user.restore();
+                resetDatabase();
             });
 
             it('can delete owned poem', () => {

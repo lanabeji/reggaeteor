@@ -75,6 +75,8 @@ class App extends Component {
         } else {
             alert("Please complete all the fields");
         }
+        //Meteor.call('deletePoems');
+        console.log(this.props.poems);
     }
 
     handleMessage(event) {

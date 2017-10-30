@@ -40,7 +40,7 @@ Meteor.methods({
             createdAt: new Date(),
             counter:0,
             owner: this.userId,
-            username: Meteor.users.findOne(this.userId).username,
+            username: Meteor.user().username,
             tag: tag,
             likers: []
         });
@@ -48,7 +48,7 @@ Meteor.methods({
     'poems.remove'(poemId){
         check(poemId,String);
 
-        if (! this.userId) {
+        if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
 
@@ -87,5 +87,8 @@ Meteor.methods({
     },
     'something.print'(){
         console.log("print");
+    },
+    'deletePoems'(){
+        Poems.remove({});
     }
 });
