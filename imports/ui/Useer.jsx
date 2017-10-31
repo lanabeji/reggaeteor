@@ -25,10 +25,6 @@ export default class Useer extends Component {
 
     render() {
 
-        // Give tasks a different className when they are checked off,
-        // so that we can style them nicely in CSS
-        const userClassName = this.props.user.checked ? 'checked' : '';
-
 
         return (
             <div>
