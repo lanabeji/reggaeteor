@@ -9,7 +9,7 @@ import faker from "faker";
 import { Factory } from 'meteor/dburles:factory';
 
 
-describe('Poem', function () {
+describe('Verse', function () {
     it('should render', function () {
 
         const userId = Random.id();
