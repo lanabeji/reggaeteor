@@ -86,7 +86,7 @@ class Tops extends Component{
                 <div className="sidebar">
                         {this.props.currentUser ?
                         <div>
-                            <p className="titulos">¿Necesita' reggaeton?</p>
+                            <p className="tituloFrase">¿Necesita' reggaeton?</p>
                             <form className="new-poem">
                                 <textarea
                                     ref="textInput"
@@ -128,18 +128,22 @@ class Tops extends Component{
                         </div>
                     }
                 </div>
-                <div className="content">
+                <div className="content mainTop">
+                    <div className="topUsers">
                     <p className="titulos">Top 5 users</p>
-                    <div className="longlist">
+                    <div className="longlist feed-2col">
                         <ol id="listaUsers">
                             {this.renderTopUsers()}
                         </ol>
                     </div>
+                    </div>
+                    <div className="topFrases">
                     <p className="titulos">Top 5 poems</p>
-                    <div className="longlist">
+                    <div className="longlist feed-2col">
                         <ul className="poemList">
                             {this.renderTopPoems()}
                         </ul>
+                    </div>
                     </div>
                 </div>
             </div>

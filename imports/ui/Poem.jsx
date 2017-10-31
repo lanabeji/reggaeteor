@@ -29,8 +29,9 @@ export default class Poem extends Component {
                 <li className="poem">
 
                 <span className="text">
-                    <strong className="poemAuthor">{this.props.poem.username} posted:</strong>
-                    <p className="poemTextTag">{this.props.poem.tag}</p>
+                    <strong className="poemAuthor">{this.props.poem.username}</strong><strong> canta:</strong>
+                    <br/>
+                    <str>Tag: </str><str className="poemTextTag">{this.props.poem.tag}</str>
                     <pre className="poemText">{this.props.poem.text}</pre>
                 </span>
 
@@ -63,9 +64,7 @@ export default class Poem extends Component {
                                 &nbsp;
                             </button>
                         }
-
-
-
+                        
                     <span className="likesCounter">
                          Likes: {this.props.poem.counter}
                     </span>

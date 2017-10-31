@@ -106,7 +106,7 @@ class Messenger extends Component {
                 <div className="sidebar">
                     {this.props.currentUser ?
                         <div>
-                            <p className="titulos">¿Necesita' reggaeton?</p>
+                            <p className="tituloFrase">¿Necesita' reggaeton?</p>
                             <form className="new-poem">
                                 <textarea
                                     ref="textInput"
