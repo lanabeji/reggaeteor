@@ -46,7 +46,7 @@ class App extends Component {
             <Poem key={poem._id} poem={poem} user={this.props.currentUser}/>
         ));
     }
-
+//Ya que la página está en español, pueden manejar las alertas en español también.
     handleSubmit(event) {
         event.preventDefault();
 
@@ -73,7 +73,7 @@ class App extends Component {
         //Meteor.call('deletePoems');
         console.log(this.props.poems);
     }
-
+    //Ya que la página está en español, pueden manejar las alertas en español también.
     handleMessage(event) {
         event.preventDefault();
 
