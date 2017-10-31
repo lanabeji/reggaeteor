@@ -21,7 +21,8 @@ class App extends Component {
         super(props);
         this.state = {
             filteredPoems: [],
-            topPoems: []
+            topPoems: [],
+            lastSearch: "",
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,7 +31,7 @@ class App extends Component {
         this.handleMessage = this.handleMessage.bind(this);
     }
 
-    langed(){
+    langed() {
 
     }
 
@@ -122,10 +123,17 @@ class App extends Component {
             console.log("Entró a handle search");
 
             this.setState({
+                lastSearch: text,
                 filteredPoems: filtrados
             });
         } else {
-            alert("Please enter a valid filter value");
+
+            let lista = this.props.poems;
+
+            this.setState({
+                filteredPoems: lista
+            });
+
         }
 
         // Clear form
@@ -185,9 +193,20 @@ class App extends Component {
     }
 
     renderFilteredPoems() {
-        return this.state.filteredPoems.map((poem) => (
-            <Poem key={poem._id} poem={poem} user={this.props.currentUser}/>
-        ));
+        if (this.state.filteredPoems.length > 0) {
+            return this.state.filteredPoems.map((poem) => (
+                <Poem key={poem._id} poem={poem} user={this.props.currentUser}/>
+            ));
+        }
+        else {
+            return (
+                <div className="poem">
+                <span className="text">
+                    <strong className="poemAuthor">No se encontró ningún resultado</strong>
+                </span>
+                </div>
+            )
+        }
     }
 
     renderRcvMessages() {
@@ -210,7 +229,7 @@ class App extends Component {
 
     }
 
-    printPrueba(){
+    printPrueba() {
         return "prueba";
     }
 
@@ -227,14 +246,14 @@ class App extends Component {
                                     ref="textInput"
                                     className="poemInput"
                                     placeholder="Comparte lo que quieras en este espacio"
-                                    aria-label = "frase célebre"
+                                    aria-label="frase célebre"
                                 />
                                 <input
                                     type="text"
                                     ref="tagInput"
                                     className="poemTag"
                                     placeholder="#taggea tus publicaciones"
-                                    aria-label = "tag para la frase célebre"
+                                    aria-label="tag para la frase célebre"
                                 />
                                 <button className="poemBtn" onClick={this.handleSubmit}>Send</button>
                             </form>
@@ -266,11 +285,28 @@ class App extends Component {
                     }
                 </div>
                 <div className="content mainFeed">
-                    <p className="titulos">Esto está pasando:</p>
+                    {/*<p className="titulos">Esto está pasando:</p>*/}
+                    {/*<div className="longlist feed">*/}
+                    {/*<div className="poemList">*/}
+                    {/*{this.renderPoems()}*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    <p className="titulos">Lo que está pasando:  </p>
+                    <form className="filter-poem">
+                        <input
+                            className="filterInput"
+                            type="text"
+                            ref="filterInput"
+                            placeholder="Busca y encuentra"
+                            aria-label="búsqueda"
+                        />
+                        <button className="filterBtn" onClick={this.handleSearch}>
+                            .
+                        </button>
+                    </form>
+
                     <div className="longlist feed">
-                        <div className="poemList">
-                            {this.renderPoems()}
-                        </div>
+                        {this.state.filteredPoems.length > 0 || this.state.lastSearch !== "" ? this.renderFilteredPoems() : this.renderPoems()}
                     </div>
                 </div>
             </div>

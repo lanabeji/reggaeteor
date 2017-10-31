@@ -41,12 +41,12 @@ export default class Poem extends Component {
                             <span>
                                 {this.props.user.username===this.props.poem.username?
                                     <button className="delete" onClick={this.deleteThisPoem.bind(this)}
-                                            style={{display:"initial", color:"white"}} value="like" tabindex="0">
+                                            style={{display:"initial", color:"white"}} value="like" tabIndex="0">
                                         .
                                     </button>
                                     :
                                     <button className="delete" onClick={this.deleteThisPoem.bind(this)}
-                                            style={{display:"none", color:"white"}} value="like" tabindex="0">
+                                            style={{display:"none", color:"white"}} value="like" tabIndex="0">
                                         .
                                     </button>
                                 }
@@ -55,12 +55,12 @@ export default class Poem extends Component {
 
                         {this.props.user?
                             <button className="like" name='PuedeContar' onClick={this.increaseCounter.bind(this)}
-                                    style={{display:"initial", color:"white"}} value="like" tabindex="0">
+                                    style={{display:"initial", color:"white"}} value="like" tabIndex="0">
                                 .
                             </button>
                             :
                             <button className="like" name='PuedeContar' onClick={this.increaseCounter.bind(this)}
-                                    style={{display:"none", color:"white"}} value="like" tabindex="0">
+                                    style={{display:"none", color:"white"}} value="like" tabIndex="0">
                                 &nbsp;
                             </button>
                         }

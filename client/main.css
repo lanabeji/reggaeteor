@@ -438,8 +438,15 @@ str {
 
 .longlist {
     border: solid black 1px;
-    height: 70vh;
+    max-height: 70vh;
     overflow: scroll;
+}
+
+.filter-poem{
+    text-align: center;
+    position: relative;
+    width: 50%;
+    left: 25%;
 }
 
 .feed {
