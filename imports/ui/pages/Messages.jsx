@@ -145,12 +145,14 @@ class Messenger extends Component {
                                     ref="textInput"
                                     className="poemInput"
                                     placeholder="Comparte lo que quieras en este espacio"
+                                    aria-label = "Frase célebre"
                                 />
                                 <input
                                     type="text"
                                     ref="tagInput"
                                     className="poemTag"
                                     placeholder="#taggea tus publicaciones"
+                                    aria-label = "tag para la frase célebre"
                                 />
                                 <button className="poemBtn" onClick={this.handleSubmit}>Send</button>
                             </form>
@@ -206,12 +208,14 @@ class Messenger extends Component {
                                         ref="toInput"
                                         className="messageTo"
                                         placeholder="Destinatario"
+                                        aria-label = "Destinatario del mensaje"
                                     />
                                     <p className="dir">Message:</p>
                                     <textarea
                                         ref="textInputMessage"
                                         className="messageInput"
                                         placeholder="Dí lo que tengas que decir"
+                                        aria-label = "Cuerpo del mensaje"
                                     />
 
                                     <button className="messageBtn" onClick={this.handleMessage}>Send</button>

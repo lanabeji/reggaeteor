@@ -20,7 +20,7 @@ img {
 }
 
 strong {
-    color: #b75bb7;
+    color: #8c408c;
     font-size: 1.1rem;
 }
 
@@ -272,7 +272,7 @@ str {
 
 .titulos {
     font-size: 2rem;
-    color: #cccccc;
+    color: #e4e4e4;
     text-shadow: 1px 1px 5px black;
     text-align: center;
 }
@@ -489,6 +489,11 @@ str {
     resize: none;
     box-sizing: border-box;
     border-radius: 5px;
+}
+
+#login-name-link{
+    background-color: black;
+    color: white;
 }
 
 .messageTo:focus,

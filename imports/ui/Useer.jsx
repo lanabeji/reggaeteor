@@ -28,7 +28,7 @@ export default class Useer extends Component {
 
         return (
             <div>
-                <li className="user">
+                <div className="user">
                 <span className="text">
                     <strong>{this.props.user.username}:</strong> {this.props.user.puntaje === undefined ? 0 : this.props.user.puntaje}
                     points
@@ -51,7 +51,7 @@ export default class Useer extends Component {
                     {/*<p>Position: {this.props.user.positions[0]} </p>*/}
                     {/*<p>{this.props.poem.tag}</p>*/}
 
-                </li>
+                </div>
                 <hr/>
             </div>
         );

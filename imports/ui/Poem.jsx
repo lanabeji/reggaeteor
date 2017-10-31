@@ -26,7 +26,7 @@ export default class Poem extends Component {
     render() {
         return (
             <div>
-                <li className="poem">
+                <div className="poem">
 
                 <span className="text">
                     <strong className="poemAuthor">{this.props.poem.username}</strong><strong> canta:</strong>
@@ -40,27 +40,27 @@ export default class Poem extends Component {
                         {this.props.user ?
                             <span>
                                 {this.props.user.username===this.props.poem.username?
-                                    <button className="delete" id="DeleteButton" onClick={this.deleteThisPoem.bind(this)}
-                                            style={{display:"initial"}}>
-                                        &nbsp;
+                                    <button className="delete" onClick={this.deleteThisPoem.bind(this)}
+                                            style={{display:"initial", color:"white"}} value="like" tabindex="0">
+                                        .
                                     </button>
                                     :
-                                    <button className="delete" id="DeleteButton" onClick={this.deleteThisPoem.bind(this)}
-                                            style={{display:"none"}}>
-                                        &nbsp;
+                                    <button className="delete" onClick={this.deleteThisPoem.bind(this)}
+                                            style={{display:"none", color:"white"}} value="like" tabindex="0">
+                                        .
                                     </button>
                                 }
                             </span>:''
                         }
 
                         {this.props.user?
-                            <button className="like" id="LikeButton" name='PuedeContar' onClick={this.increaseCounter.bind(this)}
-                                    style={{display:"initial"}}>
-                                &nbsp;
+                            <button className="like" name='PuedeContar' onClick={this.increaseCounter.bind(this)}
+                                    style={{display:"initial", color:"white"}} value="like" tabindex="0">
+                                .
                             </button>
                             :
-                            <button className="like" id="LikeButton" name='PuedeContar' onClick={this.increaseCounter.bind(this)}
-                                    style={{display:"none"}}>
+                            <button className="like" name='PuedeContar' onClick={this.increaseCounter.bind(this)}
+                                    style={{display:"none", color:"white"}} value="like" tabindex="0">
                                 &nbsp;
                             </button>
                         }
@@ -70,7 +70,7 @@ export default class Poem extends Component {
                     </span>
                 </span>
 
-                </li>
+                </div>
                 <hr/>
             </div>
         );

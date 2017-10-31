@@ -8,9 +8,10 @@ import {Messages} from "../../api/messages";
 const MainLayout = ({children}) => {
     return (
         <div className="main-layout">
+            {document.getElementsByTagName("html")[0].setAttribute("lang", "es")}
             <div className="navbar">
                 <header>
-                    <img src="/banner.png" alt="Logo Poetry"/>
+                    <a href="#"><img src="/banner.png" alt="Logo Poetry"/></a>
                     <div className="navItems">
                         <Link to="/" className="navLink">Inicio</Link>
                         <Link to="/tops" className="navLink">Tops</Link>

@@ -30,8 +30,8 @@ class App extends Component {
         this.handleMessage = this.handleMessage.bind(this);
     }
 
-    alerted() {
-        alert("Hola");
+    langed(){
+
     }
 
     renderPoems() {
@@ -227,12 +227,14 @@ class App extends Component {
                                     ref="textInput"
                                     className="poemInput"
                                     placeholder="Comparte lo que quieras en este espacio"
+                                    aria-label = "frase célebre"
                                 />
                                 <input
                                     type="text"
                                     ref="tagInput"
                                     className="poemTag"
                                     placeholder="#taggea tus publicaciones"
+                                    aria-label = "tag para la frase célebre"
                                 />
                                 <button className="poemBtn" onClick={this.handleSubmit}>Send</button>
                             </form>
@@ -266,9 +268,9 @@ class App extends Component {
                 <div className="content mainFeed">
                     <p className="titulos">Esto está pasando:</p>
                     <div className="longlist feed">
-                        <ul className="poemList">
+                        <div className="poemList">
                             {this.renderPoems()}
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>

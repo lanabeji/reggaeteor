@@ -92,12 +92,14 @@ class Tops extends Component{
                                     ref="textInput"
                                     className="poemInput"
                                     placeholder="Comparte lo que quieras en este espacio"
+                                    aria-label = "frase célebre"
                                 />
                                 <input
                                     type="text"
                                     ref="tagInput"
                                     className="poemTag"
                                     placeholder="#taggea tus publicaciones"
+                                    aria-label = "tag para la frase célebre"
                                 />
                                 <button className="poemBtn" onClick={this.handleSubmit}>Send</button>
                             </form>
@@ -132,17 +134,17 @@ class Tops extends Component{
                     <div className="topUsers">
                     <p className="titulos">Top 5 users</p>
                     <div className="longlist feed-2col">
-                        <ol id="listaUsers">
+                        <div id="listaUsers">
                             {this.renderTopUsers()}
-                        </ol>
+                        </div>
                     </div>
                     </div>
                     <div className="topFrases">
                     <p className="titulos">Top 5 poems</p>
                     <div className="longlist feed-2col">
-                        <ul className="poemList">
+                        <div className="poemList">
                             {this.renderTopPoems()}
-                        </ul>
+                        </div>
                     </div>
                     </div>
                 </div>
