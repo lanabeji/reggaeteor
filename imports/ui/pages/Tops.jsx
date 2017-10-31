@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+
 import PropTypes from 'prop-types';
+
 import {createContainer} from "meteor/react-meteor-data";
 
+import {Poems} from "../../api/poems";
+
 import Useer from '../Useer';
+import Poem from '../Poem';
 
-
-//TODO: Implementar el usuario como props de la clase
 
 class Tops extends Component{
 
@@ -31,24 +34,25 @@ class Tops extends Component{
         //Meteor.call('users.puntaje');
         //Meteor.call('users.positions');
 
-        var b = document.getElementById('listaUsers');
-        b.style.visibility = "visible";
-
-        console.log(topUsers);
+        return topUsers.map((user) => (
+            <Useer key={user._id} user={user}/>
+        ));
     }
 
-    renderUser() {
+    renderTopPoems() {
 
-        let lista = this.props.users.sort(function (a, b) {
-            return b.puntaje - a.puntaje;
+        let arrayOrdenado = this.props.poems.sort(function (a, b) {
+            return b.counter - a.counter;
         });
 
-        console.log("lista: "+lista.length);
-        return lista.map((user) => (
-            <Useer key={user._id} user={user}/>
+        var top = arrayOrdenado.slice(0, 5);
+
+        return top.map((poem) => (
+            <Poem key={poem._id} poem={poem} user={this.props.currentUser}/>
         ));
 
     }
+
 
     handleSubmit(event) {
         console.log("si entra");
@@ -126,12 +130,16 @@ class Tops extends Component{
                 </div>
                 <div className="content">
                     <p className="titulos">Top 5 users</p>
-
-                    <button className="topBtn" onClick={this.renderTopUsers}>Get top users</button>
                     <div className="longlist">
                         <ol id="listaUsers">
-                            {this.renderUser()}
+                            {this.renderTopUsers()}
                         </ol>
+                    </div>
+                    <p className="titulos">Top 5 poems</p>
+                    <div className="longlist">
+                        <ul className="poemList">
+                            {this.renderTopPoems()}
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -140,6 +148,7 @@ class Tops extends Component{
 }
 
 Tops.propTypes = {
+    poems: PropTypes.array.isRequired,
     users: PropTypes.array.isRequired,
     currentUser: PropTypes.object
 };
@@ -147,8 +156,10 @@ Tops.propTypes = {
 export default createContainer(() => {
 
     Meteor.subscribe('users');
+    Meteor.subscribe('poems');
 
     return {
+        poems: Poems.find({}, {sort: {createdAt: -1}}).fetch(),
         currentUser: Meteor.user(),
         users: Meteor.users.find().fetch()
     };

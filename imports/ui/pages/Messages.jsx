@@ -3,12 +3,74 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import {createContainer} from "meteor/react-meteor-data";
 
+import {Messages} from "../../api/messages";
 
-class Messages extends Component{
+
+import Message from '../Message.jsx';
+
+class Messenger extends Component {
 
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleMessage = this.handleMessage.bind(this);
+    }
+
+
+    renderNewMessage() {
+        var b = document.getElementById('newMessage');
+        b.style.display = "initial";
+    }
+
+    handleMessage(event) {
+        event.preventDefault();
+
+        // Find the text field via the React ref
+        const to = ReactDOM.findDOMNode(this.refs.toInput).value.trim();
+        const mess = ReactDOM.findDOMNode(this.refs.textInputMessage).value.trim();
+
+
+        if (!(to === "" || mess === "")) {
+
+            let low = to.toLowerCase();
+            let upp = to.toUpperCase();
+            let lista = this.props.users.filter(user => user.username === to || user.username === low || user.username === upp);
+
+            if (lista.length !== 0) {
+
+                Meteor.call('messages.insert', to, mess);
+
+                // Clear form
+                ReactDOM.findDOMNode(this.refs.toInput).value = '';
+                ReactDOM.findDOMNode(this.refs.textInputMessage).value = '';
+            }
+            else {
+                alert("The username does not exist");
+            }
+
+        } else {
+            alert("Please complete all the fields");
+        }
+    }
+
+    renderRcvMessages() {
+
+        //Descomentar en caso de querer borrar todos los mensajes de los usuarios y de la bd
+        //Meteor.call('users.messages');
+        //Meteor.call('messages.deleteAll');
+
+        console.log(this.props.messages);
+
+        return this.props.messages.filter(message => message.to === this.props.currentUser.username).map((message) => (
+            <Message key={message._id} message={message} user={this.props.currentUser}/>
+        ));
+    }
+
+    renderSndMessages() {
+        return this.props.messages.filter(message => message.from === this.props.currentUser.username).map((message) => (
+            <Message key={message._id} message={message} user={this.props.currentUser}/>
+        ));
+
     }
 
     handleSubmit(event) {
@@ -38,7 +100,7 @@ class Messages extends Component{
     }
 
 
-    render(){
+    render() {
         return (
             <div className="content">
                 <div className="sidebar">
@@ -86,20 +148,64 @@ class Messages extends Component{
                         </div>
                     }
                 </div>
+                <div className="messContent">
 
-                {/*Falta todo porque usa funciones de APP*/}
+                    {this.props.currentUser ?
+                        <div>
+                            <button className="createMsg" onClick={this.renderNewMessage}>Create new message</button>
+                            <form className="new-message" id="newMessage" style={{display: "none"}}>
+
+                                <p>To:</p>
+                                <input
+                                    type="text"
+                                    ref="toInput"
+                                    className="messageTo"
+                                    placeholder=""
+                                />
+                                <p>Message:</p>
+                                <textarea
+                                    ref="textInputMessage"
+                                    className="messageInput"
+                                    placeholder="Type to add write a new message"
+                                />
+
+                                <button className="messageBtn" onClick={this.handleMessage}>Send</button>
+                            </form>
+                        </div>: ''
+                    }
+
+                    {this.props.currentUser ?
+                        <div>
+                            <p><strong>Sent messages</strong></p>
+                            <ul>
+                                {this.renderSndMessages()}
+                            </ul>
+                            <p><strong>Received messages</strong></p>
+                            <ul>
+                                {this.renderRcvMessages()}
+                            </ul>
+                        </div> : 'No hay mensajes para ti :('
+
+                    }
+                </div>
             </div>
         )
     }
 }
 
-Messages.propTypes = {
-    currentUser: PropTypes.object
+Messenger.propTypes = {
+    currentUser: PropTypes.object,
+    messages: PropTypes.array
 };
 
 export default createContainer(() => {
 
+    Meteor.subscribe('messages');
+    Meteor.subscribe('users');
+
     return {
         currentUser: Meteor.user(),
+        users: Meteor.users.find().fetch(),
+        messages: Messages.find().fetch()
     };
-}, Messages);
+}, Messenger);

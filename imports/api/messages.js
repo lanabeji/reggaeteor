@@ -25,7 +25,8 @@ Meteor.methods({
         check(text, String);
         check(to, String);
 
-        var from= this.username;
+        var from= Meteor.user().username;
+        console.log("from: "+from);
 
         // Make sure the user is logged in before inserting a message
         if (!this.userId) {
