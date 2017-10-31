@@ -6,7 +6,7 @@ if(Meteor.isServer){
     SyncedCron.config({
         collectionName: 'historialCron'
     });
-
+//Está muy bien que hayan esto en el servidor para mejorar la seguridad
     SyncedCron.add({
         name: 'Definir posiciones',
         schedule: function(parser) {
@@ -26,7 +26,7 @@ if(Meteor.isServer){
     });
 }
 
-
+//Para la accesibilidad, lograron cambiar el tag html lang? 
 Meteor.startup(() => {
   // code to run on server at startup
     SyncedCron.start();
