@@ -9,8 +9,8 @@ import { resetDatabase } from "meteor/xolvio:cleaner";
 import { Factory } from "meteor/dburles:factory";
 
 if (Meteor.isServer) {
-    describe('Poems', () => {
-        describe('poems methods', () => {
+    describe('Reggaeteor', () => {
+        describe('verse methods', () => {
 
             const userId = Random.id();
             let poemId;
@@ -46,7 +46,7 @@ if (Meteor.isServer) {
                 resetDatabase();
             });
 
-            it('can delete owned poem', () => {
+            it('can delete owned verse', () => {
 
                 const deletePoem = Meteor.server.method_handlers['poems.remove'];
                 const invocation = { userId };
@@ -55,7 +55,7 @@ if (Meteor.isServer) {
 
             });
 
-            it('can increase poem counter', ()=>{
+            it('can increase verse counter', ()=>{
 
                 const incCounter = Meteor.server.method_handlers['poems.increaseCounter'];
                 const invocation = { userId };
@@ -66,7 +66,7 @@ if (Meteor.isServer) {
 
             });
 
-            it('can insert a new poem', ()=>{
+            it('can insert a new verse', ()=>{
 
                 let text = faker.lorem.text();
                 let tag = faker.lorem.word();
@@ -83,15 +83,32 @@ if (Meteor.isServer) {
             const userId = Random.id();
             let messageId;
             let toUser = faker.name.firstName();
-            let fromUser = faker.name.firstName();
+
+            let name = faker.name.findName();
+            let currentUser;
 
             beforeEach(() => {
                 Messages.remove({});
+
+                // Stud the user
+                resetDatabase();
+                Factory.define("user", Meteor.users, {
+                    username: name,
+                });
+                currentUser = Factory.create("user");
+                sinon.stub(Meteor, "user");
+                Meteor.user.returns(currentUser);
+
                 messageId = Messages.insert({
                     to:toUser,
-                    from:fromUser,
+                    from:currentUser,
                     text: 'test message'
                 });
+            });
+
+            afterEach(() => {
+                Meteor.user.restore();
+                resetDatabase();
             });
 
             it('can insert a new message', ()=>{

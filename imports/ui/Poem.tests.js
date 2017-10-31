@@ -21,9 +21,12 @@ describe('Poem', function () {
 
         chai.assert(poem.find("button").length, 2);
         chai.assert(poem.find("li").length, 1);
+        chai.assert(poem.find("strong").length, 1);
         chai.assert(poem.find("p").length, 1);
         chai.assert(poem.find("pre").length, 1);
         chai.assert(poem.find("span").length, 3);
+        chai.assert(poem.find("hr").length, 1);
+        chai.assert(poem.find("div").length, 1);
 
     });
 });
