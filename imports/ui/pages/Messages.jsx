@@ -6,7 +6,9 @@ import {createContainer} from "meteor/react-meteor-data";
 import {Messages} from "../../api/messages";
 
 
-import Message from '../Message.jsx';
+import MessageS from '../MessageS';
+import MessageR from '../MessageR';
+
 
 class Messenger extends Component {
 
@@ -16,10 +18,41 @@ class Messenger extends Component {
         this.handleMessage = this.handleMessage.bind(this);
     }
 
+    renderRcvMessage() {
+
+        var a = document.getElementById('rcvBtn');
+        var b = document.getElementById('rcvCont');
+
+
+        a.style.backgroundColor === "rgb(55, 31, 76)" ? a.style.backgroundColor = "dimgray" : a.style.backgroundColor = "#371f4c";
+
+        var state = b.style.display;
+
+        state === "initial" ? b.style.display = "none" : b.style.display = "initial";
+    }
+
+    renderSntMessage() {
+
+        var a = document.getElementById('sntBtn');
+        var b = document.getElementById('sentCont');
+
+        a.style.backgroundColor === "rgb(55, 31, 76)" ? a.style.backgroundColor = "dimgray" : a.style.backgroundColor = "#371f4c";
+
+        var state = b.style.display;
+
+
+        state === "initial" ? b.style.display = "none" : b.style.display = "initial";
+    }
 
     renderNewMessage() {
+
+        var a = document.getElementById('createBtn');
+        a.style.backgroundColor === "rgb(55, 31, 76)" ? a.style.backgroundColor = "dimgray" : a.style.backgroundColor = "#371f4c";
+
         var b = document.getElementById('newMessage');
-        b.style.display = "initial";
+        var state = b.style.display;
+
+        state === "initial" ? b.style.display = "none" : b.style.display = "initial";
     }
 
     handleMessage(event) {
@@ -62,13 +95,13 @@ class Messenger extends Component {
         console.log(this.props.messages);
 
         return this.props.messages.filter(message => message.to === this.props.currentUser.username).map((message) => (
-            <Message key={message._id} message={message} user={this.props.currentUser}/>
+            <MessageR key={message._id} message={message} user={this.props.currentUser}/>
         ));
     }
 
     renderSndMessages() {
         return this.props.messages.filter(message => message.from === this.props.currentUser.username).map((message) => (
-            <Message key={message._id} message={message} user={this.props.currentUser}/>
+            <MessageS key={message._id} message={message} user={this.props.currentUser}/>
         ));
 
     }
@@ -102,7 +135,7 @@ class Messenger extends Component {
 
     render() {
         return (
-            <div className="content">
+            <div className="messContent">
                 <div className="sidebar">
                     {this.props.currentUser ?
                         <div>
@@ -148,47 +181,66 @@ class Messenger extends Component {
                         </div>
                     }
                 </div>
-                <div className="messContent">
+                <div className="content mainMess">
 
                     {this.props.currentUser ?
                         <div>
-                            <button className="createMsg" onClick={this.renderNewMessage}>Create new message</button>
-                            <form className="new-message" id="newMessage" style={{display: "none"}}>
+                            <div className="messBtn">
+                                <button className="createMsg" id="createBtn" onClick={this.renderNewMessage}>Create new
+                                    message
+                                </button>
+                                <button className="createMsg" id="rcvBtn" onClick={this.renderRcvMessage}>Ver mensajes
+                                    recibidos
+                                </button>
+                                <button className="createMsg" id="sntBtn" onClick={this.renderSntMessage}>Ver mensajes
+                                    enviados
+                                </button>
+                            </div>
+                            <div className="newMessCont">
+                                <form className="new-message" id="newMessage" style={{display: "none"}}>
+                                    <br/>
+                                    <p><strong className="mesHeader">Envía un mensaje nuevo</strong></p>
+                                    <p className="dir">To:</p>
+                                    <input
+                                        type="text"
+                                        ref="toInput"
+                                        className="messageTo"
+                                        placeholder="Destinatario"
+                                    />
+                                    <p className="dir">Message:</p>
+                                    <textarea
+                                        ref="textInputMessage"
+                                        className="messageInput"
+                                        placeholder="Dí lo que tengas que decir"
+                                    />
 
-                                <p>To:</p>
-                                <input
-                                    type="text"
-                                    ref="toInput"
-                                    className="messageTo"
-                                    placeholder=""
-                                />
-                                <p>Message:</p>
-                                <textarea
-                                    ref="textInputMessage"
-                                    className="messageInput"
-                                    placeholder="Type to add write a new message"
-                                />
-
-                                <button className="messageBtn" onClick={this.handleMessage}>Send</button>
-                            </form>
-                        </div>: ''
+                                    <button className="messageBtn" onClick={this.handleMessage}>Send</button>
+                                </form>
+                            </div>
+                        </div> : ''
                     }
-
-                    {this.props.currentUser ?
-                        <div>
-                            <p><strong>Sent messages</strong></p>
-                            <ul>
-                                {this.renderSndMessages()}
-                            </ul>
-                            <p><strong>Received messages</strong></p>
-                            <ul>
-                                {this.renderRcvMessages()}
-                            </ul>
-                        </div> : 'No hay mensajes para ti :('
-
-                    }
+                    <div className="mesStatsCont">
+                        {this.props.currentUser ?
+                            <div>
+                                <div id="sentCont">
+                                    <p><strong className="mesHeader">Sent messages</strong></p>
+                                    <ul>
+                                        {this.renderSndMessages()}
+                                    </ul>
+                                </div>
+                                < div id="rcvCont">
+                                    <p><strong className="mesHeader"> Received messages</strong></p>
+                                    <ul>
+                                        {this.renderRcvMessages()}
+                                    </ul>
+                                </div>
+                            </div>
+                            : 'No hay mensajes para ti :('
+                        }
+                    </div>
                 </div>
             </div>
+
         )
     }
 }

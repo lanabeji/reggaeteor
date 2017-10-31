@@ -19,7 +19,7 @@ img {
     padding: 5px 0;
 }
 
-strong{
+strong {
     color: #b75bb7;
     font-size: 1.1rem;
 }
@@ -31,7 +31,16 @@ hr {
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
 
-str{
+li {
+    list-style: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+str {
 
     color: #cccccc;;
     display: inline-block;
@@ -41,7 +50,7 @@ str{
     padding-top: 90px;
 }
 
-.poem{
+.poem {
     z-index: -11;
 }
 
@@ -54,11 +63,11 @@ str{
     display: inline-block;
 }
 
-.navItems{
+.navItems {
     float: right;
 }
 
-.navLink{
+.navLink {
     color: #eee;
     display: inline-block;
     height: 100%;
@@ -68,7 +77,7 @@ str{
     line-height: 60px;
 }
 
-.navLink:hover{
+.navLink:hover {
     background-color: white;
     color: rgb(85, 26, 139);
     box-shadow: inset 0 0 10px grey;
@@ -81,7 +90,6 @@ str{
     line-height: 30px;
     padding-left: 7%;
 }
-
 
 .sidebar {
     position: fixed;
@@ -96,18 +104,17 @@ str{
     box-shadow: -3px 0px 5px grey;
 }
 
-
 .homeContent,
 .topContent,
 .messContent,
-.favContent{
+.favContent {
     display: inline-block;
     box-sizing: border-box;
     width: 100vw;
     height: 100vh;
 }
 
-.content{
+.content {
     position: absolute;
     width: 70%;
     top: 90px;
@@ -115,63 +122,150 @@ str{
     padding: 0 25px;
 }
 
-.mainFeed{
+.mainFeed {
     background-image: radial-gradient(transparent, rgba(0, 0, 0, 0.9)), url("/bgHome.jpg");
+    /*background-attachment: fixed;*/
 }
 
-.mainTop{
+.mainTop {
     background-image: radial-gradient(transparent, rgba(0, 0, 0, 0.9)), url("/bgTop.jpg");
+    background-attachment: fixed;
+}
+
+.mainMess {
+    background-image: radial-gradient(transparent, rgba(0, 0, 0, 0.9)), url("/bgMess.jpg");
+    background-attachment: fixed;
+    min-height: 100%;
+    overflow: scroll;
 }
 
 .mainTop,
-.mainFeed{
-    background-size: cover;
-    background-position: center;
+.mainFeed {
     height: 90%;
 }
 
-.intro{
+.mainTop,
+.mainFeed,
+.mainMess {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.intro {
     text-align: left;
 }
 
-.texto{
+.texto {
     line-height: 1.2rem;
 }
 
-.textoTag{
+.textoTag {
     padding-top: 25px;
     font-size: 1.2em;
     text-align: center;
     line-height: 1.2em;
 }
 
+.messBtn {
+    margin-top: 25px;
+    box-sizing: border-box;
+}
+
+.messBtn button:first-child {
+    margin-left: 10%;
+}
+
+.createMsg {
+    border: solid 3px rgb(55, 31, 76);
+    background-color: dimgray;
+    color: white;
+    border-radius: 20px;
+    width: 20%;
+    padding: 10px;
+    margin-right: 10%;
+}
+
+.newMessCont,
+.mesStatsCont {
+    width: 60%;
+    box-sizing: border-box;
+    margin: 5% 20%;
+}
+
+.mesStatsCont {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+
+
+#sentCont,
+#rcvCont {
+    box-sizing: border-box;
+    padding: 5px 20px;
+    display: inline-block;
+    width: 100%;
+    border-radius: 25px;
+    background-color: rgba(13, 13, 13, 0.7);
+    max-height: 70vh;
+    overflow: scroll;
+    margin-bottom: 25px;
+    display: none;
+}
+
+#sentCont {
+    float: left;
+    margin-right: 10%;
+}
+
+#rcvCont {
+    float: right;
+}
+
 .main-layout,
-.render-target{
+.render-target {
     position: absolute;
     top: 0;
 }
+
+.dir,
+.message {
+    color: #cccccc;
+}
+
+.mesHeader {
+    font-size: 1.3em;
+}
+
+.message {
+
+    padding-left: 15px;
+}
+
 /*.row {*/
-    /*padding: 0 5%;*/
+/*padding: 0 5%;*/
 /*}*/
 
 /*.row::after {*/
-    /*content: '';*/
-    /*display: block;*/
-    /*clear: both;*/
+/*content: '';*/
+/*display: block;*/
+/*clear: both;*/
 /*}*/
 
 /*.column {*/
-    /*float: left;*/
-    /*min-height: 100%;*/
-    /*top: 0;*/
-    /*text-align: center;*/
-    /*margin: 0;*/
-    /*padding: 10px;*/
-    /*width: 30%;*/
-    /*display: inline-block;*/
+/*float: left;*/
+/*min-height: 100%;*/
+/*top: 0;*/
+/*text-align: center;*/
+/*margin: 0;*/
+/*padding: 10px;*/
+/*width: 30%;*/
+/*display: inline-block;*/
 /*}*/
 
-.tituloFrase{
+.tituloFrase {
     font-size: 2rem;
     text-shadow: 1px 1px 5px grey;
 }
@@ -310,6 +404,10 @@ str{
 
 }
 
+.accounts-dialog{
+    border: 3px solid #555;
+}
+
 .poem {
     overflow: hidden;
     padding: 15px;
@@ -338,15 +436,15 @@ str{
     margin: 0;
 }
 
-.longlist{
+.longlist {
     border: solid black 1px;
     height: 70vh;
     overflow: scroll;
 }
 
-.feed{
+.feed {
     width: 50%;
-    background-color: rgba(13,13,13,0.7);
+    background-color: rgba(13, 13, 13, 0.7);
     position: absolute;
     left: 25%;
     border-radius: 25px;
@@ -354,25 +452,55 @@ str{
     box-sizing: border-box;
 }
 
-.feed-2col{
-    background-color: rgba(13,13,13,0.7);
+.feed-2col {
+    background-color: rgba(13, 13, 13, 0.7);
 
     border-radius: 25px;
 }
 
 .topUsers,
-.topFrases{
+.topFrases {
     width: 40%;
     display: inline-block;
     margin: 0px 3%;
 }
 
+.newMessCont{
+    background-color: rgba(13, 13, 13, 0.7);
+    padding: 0 25px;
+    border-radius: 25px;
+}
+
+.messageBtn{
+    margin-bottom: 25px;
+}
+
+.messageTo{
+    padding: 6px 20px;
+    resize: none;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.messageInput{
+    width: 100%;
+    height: 250px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    resize: none;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.messageTo:focus,
+.messageInput:focus{
+    border: 3px solid #555;
+    outline: none;
+}
 
 #listaUsers {
     text-align: left;
     margin-top: 10px;
 }
-
 
 #login-buttons #signup-link {
     padding: 8px;
@@ -391,7 +519,12 @@ str{
 }
 
 #login-buttons .login-close-text:hover {
-    background-color: black;
+    background-color: #777;
+}
+
+.login-close-text{
+    background-color: #52514f;
+
 }
 
 #login-buttons a {
@@ -410,18 +543,18 @@ str{
 
 #login-buttons .login-button,
 .accounts-dialog .login-button {
-    background-color: rgba(235, 83, 71, 1);
+    background-color:  #371f4c;
 }
 
 #login-buttons .login-button:hover,
 .accounts-dialog .login-button:hover {
-    background-color: rgb(192, 74, 62);
+    background-color:  #371f4c;
 }
 
 #login-buttons .login-button,
 .accounts-dialog .login-button {
-    background-color: rgba(235, 83, 71, 1);
-    border: 1px solid rgba(235, 83, 71, 1);
+    background-color:  #371f4c;
+    border: 1px solid  #371f4c;
 }
 
 #login-password-again,

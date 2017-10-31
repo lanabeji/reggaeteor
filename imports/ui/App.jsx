@@ -5,7 +5,7 @@ import {Meteor} from 'meteor/meteor';
 
 import Poem from './Poem.jsx';
 import Useer from './Useer.jsx';
-import Message from './Message.jsx';
+import Message from './MessageS.jsx';
 
 import {Poems} from "../api/poems.js";
 import {Messages} from "../api/messages.js";
