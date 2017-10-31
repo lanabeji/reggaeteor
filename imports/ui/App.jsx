@@ -221,7 +221,7 @@ class App extends Component {
                 <div className="sidebar">
                     {this.props.currentUser ?
                         <div>
-                            <p className="titulos">¿Necesita' reggaeton?</p>
+                            <p className="tituloFrase">¿Necesita' reggaeton?</p>
                             <form className="new-poem">
                                 <textarea
                                     ref="textInput"
@@ -263,9 +263,9 @@ class App extends Component {
                         </div>
                     }
                 </div>
-                <div className="content">
-                    <p className="titulos">Feed</p>
-                    <div className="longlist">
+                <div className="content mainFeed">
+                    <p className="titulos">Esto está pasando:</p>
+                    <div className="longlist feed">
                         <ul className="poemList">
                             {this.renderPoems()}
                         </ul>
