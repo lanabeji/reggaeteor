@@ -4,7 +4,7 @@ import {Meteor} from 'meteor/meteor';
 
 export default class Message extends Component {
 
-
+//Dejar texto en la página en español
     render() {
         return (
             <div>
